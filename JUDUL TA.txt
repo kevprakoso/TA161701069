@@ -1,0 +1,7 @@
+JUDUL TA
+__________________________________________________________________________________________
+1. Desain, Implementasi, dan Simulasi Detektor gempa dengan Android
+2. Integrasi detektor gempa dengan Semut Inteligent Transportation System dan OpenStreetMap
+3. Integrasi detektor gempa dengan manajemen evakuasi dan logistik berbasis jBPM dan Drools
+4. Integrasi detektor gempa dengan Sahana disaster Management system
+##########################################################################################
