@@ -3,7 +3,11 @@ DRAFT B200 - TA DETEKSI GEMPA & TSUNAMI
 2.1 Definisi, Fungsi, dan Spesifikasi dari Solusi
 
 Definisi
-Sistem Jaringan Detektor Gempa dan Tsunami Decision Support System merupakan sistem multi komponen yang  terintegrasi dengan jaringan nirkabel yang menggunakan data pengukuran secara aktual dari berbagai sensor yang digunakan dan akan diolah pada Decision Support System (DSS) yang nantinya akan melakukan pemberitahuan ketika dan sesudah terjadi gempa dan tsunami.
+Sistem Jaringan Detektor Gempa dan Tsunami Decision Support System merupakan sistem multi komponen yang  terintegrasi dengan jaringan 
+
+nirkabel yang menggunakan data pengukuran secara aktual dari berbagai sensor yang digunakan dan akan diolah pada Decision Support System 
+
+(DSS) yang nantinya akan melakukan pemberitahuan ketika dan sesudah terjadi gempa dan tsunami.
 
 Fungsi
 - Mengambil data aktivitas seismik dari beberapa titik lokasi
@@ -17,10 +21,26 @@ Spesifikasi
 - Dapat membaca dan menyimpan data secara aktual
 - Data dapat ditampilkan dalam bentuk yang informatif
 - Data dapat diakses dari beberapa device yang berbeda 
-- Jika terjadi Gempa, dapat dilakukan pemberitahuan mengenai 
+- Jika terjadi Gempa, dapat dilakukan pemberitahuan
 
 
 2.2 Spesifikasi Tugas Akhir 
 - Harga sensor yang digunakan lebih rendah dari harga seismometer
 - Dapat melakukan pengambilan data secara aktual 
-- Dapat melakukan 
+- Data dapat ditampilkan dalam bentuk yang informatif
+- Data dapat diakses dari beberapa device yang berbeda 
+- Jika terjadi Gempa, dapat dilakukan pemberitahuan
+Constraint
+  Spesifikasi sensor vs range deteksi
+  Waktu analisa vs akurasi deteksi
+
+2.3 Penjelasan fungsi, feature, dan verifikasi
+Fungsi
+    Produk Utama
+	Nama produk : Perangkat sistem detektor gempa
+	Pengguna : pemerintah
+	Fungsi produk : integrasi dari perangkat-perangkat yang ada untuk mendeteksi gempa sehingga bisa diambil keputusan yang 		
+
+akan diambil oleh pihak berwenang.
+
+
