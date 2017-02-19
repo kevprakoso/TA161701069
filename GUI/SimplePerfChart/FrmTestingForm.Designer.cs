@@ -71,9 +71,15 @@
             this.perfChart1 = new SpPerfChart.PerfChart();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.perfChart2 = new SpPerfChart.PerfChart();
+<<<<<<< HEAD
             this.MagX = new System.Windows.Forms.TextBox();
             this.MagY = new System.Windows.Forms.TextBox();
             this.MagZ = new System.Windows.Forms.TextBox();
+=======
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
             this.label1 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -575,6 +581,7 @@
             this.perfChart2.TimerInterval = 100;
             this.perfChart2.TimerMode = SpPerfChart.TimerMode.Disabled;
             // 
+<<<<<<< HEAD
             // MagX
             // 
             this.MagX.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -601,34 +608,80 @@
             this.MagZ.ReadOnly = true;
             this.MagZ.Size = new System.Drawing.Size(100, 20);
             this.MagZ.TabIndex = 12;
+=======
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(283, 415);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 10;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(283, 459);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 11;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(283, 367);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 12;
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+<<<<<<< HEAD
             this.label1.Location = new System.Drawing.Point(284, 362);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "X Magnitude";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+=======
+            this.label1.Location = new System.Drawing.Point(280, 351);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Magnitude X";
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
             // 
             // label12
             // 
             this.label12.AutoSize = true;
+<<<<<<< HEAD
             this.label12.Location = new System.Drawing.Point(285, 409);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(67, 13);
             this.label12.TabIndex = 14;
             this.label12.Text = "Y Magnitude";
+=======
+            this.label12.Location = new System.Drawing.Point(280, 399);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(67, 13);
+            this.label12.TabIndex = 14;
+            this.label12.Text = "Magnitude Y";
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
             // 
             // label13
             // 
             this.label13.AutoSize = true;
+<<<<<<< HEAD
             this.label13.Location = new System.Drawing.Point(280, 451);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(67, 13);
             this.label13.TabIndex = 15;
             this.label13.Text = "Z Magnitude";
+=======
+            this.label13.Location = new System.Drawing.Point(280, 443);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(67, 13);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "Magnitude Z";
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
             // 
             // FrmTestingForm
             // 
@@ -638,9 +691,15 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label1);
+<<<<<<< HEAD
             this.Controls.Add(this.MagZ);
             this.Controls.Add(this.MagY);
             this.Controls.Add(this.MagX);
+=======
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.gMapControl1);
@@ -712,9 +771,15 @@
         private SpPerfChart.PerfChart perfChart1;
         private System.Windows.Forms.GroupBox groupBox4;
         private SpPerfChart.PerfChart perfChart2;
+<<<<<<< HEAD
         private System.Windows.Forms.TextBox MagX;
         private System.Windows.Forms.TextBox MagY;
         private System.Windows.Forms.TextBox MagZ;
+=======
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+>>>>>>> 177cf4807eb2bc33ca63c3ac30456184ea81f560
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;

@@ -13,7 +13,16 @@ namespace SimplePerfChart
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmTestingForm());
+            try
+            {
+                Application.Run(new FrmTestingForm());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: {0}", ex);
+                //Application.Run(new FrmTestingForm());
+            }
+
         }
     }
 }
