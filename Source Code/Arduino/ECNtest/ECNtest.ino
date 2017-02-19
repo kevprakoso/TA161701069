@@ -27,9 +27,9 @@
 #define SCL_PIN D1
 #define PWR_MGMT 0x6B
 #define IMU_RES 1
-#define RXPin 14
-#define TXPin 12
-#define GPSBaud 9600
+#define RXPin D5
+#define TXPin D6
+#define GPSBaud 19200
 #define SendPeriod 60000 //in ms
 
 const char* TIMEZONE = "Asia/Jakarta"; 
@@ -114,18 +114,39 @@ struct data msg;
 
 struct data InitJsonObject(struct data msg);
 String JsonToString(struct data msg);
-int i = 0;
+int i = 0, j= 0;
+bool checkgps = false;
 
 //====================================================//
 //===================MAIN ALGORITHM===================//
 //====================================================//
 
-void setup() {
-  // put your setup code here, to run once:
+
+
+//#include <TinyGPS++.h>
+//#include <SoftwareSerial.h>
+///*
+//   This sample sketch demonstrates the normal use of a TinyGPS++ (TinyGPSPlus) object.
+//   It requires the use of SoftwareSerial, and assumes that you have a
+//   4800-baud serial GPS device hooked up on pins 4(rx) and 3(tx).
+//*/
+//static const int RXPin = D5, TXPin = D6;
+//static const uint32_t GPSBaud = 19200;
+//
+//// The TinyGPS++ object
+//TinyGPSPlus gps;
+//
+//// The serial connection to the GPS device
+//SoftwareSerial ss(RXPin, TXPin);
+
+void setup()
+{
+
+    // put your setup code here, to run once:
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   MPU6050_Init();
-  ss.begin(GPSBaud);
-  Serial.begin(9600);
+  //ss.begin(GPSBaud);
+  //Serial.begin(9600);
 
 
   msg = InitJsonObject(msg);
@@ -134,16 +155,56 @@ void setup() {
   WiFiConnect();
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
-      
+  
+  Serial.begin(115200);
+  ss.begin(GPSBaud);
+
+  Serial.println(F("DeviceExample.ino"));
+  Serial.println(F("A simple demonstration of TinyGPS++ with an attached GPS module"));
+  Serial.print(F("Testing TinyGPS++ library v. ")); Serial.println(TinyGPSPlus::libraryVersion());
+  Serial.println(F("by Mikal Hart"));
+  Serial.println();
+
+  while (!checkgps)
+  {
+    while (ss.available() > 0)
+    if (gps.encode(ss.read()))
+    {
+      displayInfo();
+      checkgps = true;
+    }
+    if (millis() > 5000 && gps.charsProcessed() < 10)
+  {
+    Serial.println(F("No GPS detected: check wiring."));
+    while(true);
+  }    
+  }
+  
 }
 
-
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop()
+{
   data = Acc_Read();
   msg.accelerations[i].x = data.x;
   msg.accelerations[i].y = data.y;
   msg.accelerations[i].z = data.z;
+  
+  // This sketch displays information every time a new sentence is correctly encoded.
+  while (ss.available() > 0)
+    if (gps.encode(ss.read()))
+      displayInfo();
+
+  if (millis() > 5000 && gps.charsProcessed() < 10)
+  {
+    Serial.println(F("No GPS detected: check wiring."));
+    while(true);
+  }
+
+  data = Acc_Read();
+  msg.accelerations[i].x = data.x;
+  msg.accelerations[i].y = data.y;
+  msg.accelerations[i].z = data.z;
+  
   i++;
   if (!client.connected()) {
     reconnect_server();
@@ -154,33 +215,14 @@ void loop() {
   if(i==20)
   {
     i = 0;
-    /*
-    StaticJsonBuffer<1000> msgjsonBuffer;
-    JsonObject& msg = msgjsonBuffer.createObject();
-    msg["pointTime"] = "";
-    msg["timeZone"] = TIMEZONE;
-    msg["interval"] = SendPeriod;
-    
-    JsonObject& geojson = msg.createNestedObject("geojson");
-    geojson["type"] = "feature";
-    
-    JsonObject& geometry = geojson.createNestedObject("geometry");
-    geometry["type"] = "Point";
-    JsonObject& coordinates = geometry.createNestedObject("coordinates");
-    coordinates["lon"] = 0;
-    coordinates["lng"] = 0;
-    
-    
-    JsonObject& properties = geojson.createNestedObject("properties");
-    properties["name"] = "ITB";
-
-
-    JsonObject& accelerations = msg.createNestedObject("accelerations");
-    accelerations["x"] = data.x;
-    accelerations["y"] = data.y;
-    accelerations["z"] = data.z;
-    */
-    
+    String YEAR = String(gps.date.year());
+    String MONTH = String(gps.date.month());
+    String DATE = String(gps.date.day());
+    String HOUR = String(gps.time.hour());
+    String MINUTE = String(gps.time.minute());
+    String SECOND = String(gps.time.second());
+    msg.pointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":"+ SECOND + "Z";    
+      
     //lstMsg = now;
     String message = JsonToString(msg); 
     //msg.printTo(message);
@@ -191,8 +233,64 @@ void loop() {
     if(test)
       Serial.println("publish success");
   }
-  delay(25);
+  delay(50);
 }
+
+void displayInfo()
+{
+  Serial.print(F("Location: ")); 
+  if (gps.location.isValid())
+  {
+    Serial.print(gps.location.lat(), 6);
+    msg.geometry.geo.coordinates[0] = String (gps.location.lat(), 6);
+    Serial.print(F(","));
+    Serial.print(gps.location.lng(), 6);
+    msg.geometry.geo.coordinates[1] = String (gps.location.lng(), 6);
+  }
+  else
+  {
+    Serial.print(F("INVALID"));
+  }
+
+  Serial.print(F("  Date/Time: "));
+  if (gps.date.isValid())
+  {
+    Serial.print(gps.date.month());
+    Serial.print(F("/"));
+    Serial.print(gps.date.day());
+    Serial.print(F("/"));
+    Serial.print(gps.date.year());
+  }
+  else
+  {
+    Serial.print(F("INVALID"));
+  }
+
+  Serial.print(F(" "));
+  if (gps.time.isValid())
+  {
+    if (gps.time.hour() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.hour());
+    Serial.print(F(":"));
+    if (gps.time.minute() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.minute());
+    Serial.print(F(":"));
+    if (gps.time.second() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.second());
+    Serial.print(F("."));
+    if (gps.time.centisecond() < 10) Serial.print(F("0"));
+    Serial.print(gps.time.centisecond());
+  }
+  else
+  {
+    Serial.print(F("INVALID"));
+  }
+
+  Serial.println();
+}
+
+
+
 
 //====================================================//
 //======Wi-Fi Connection & MQTT Function Procedure====//
@@ -212,7 +310,7 @@ void WiFiConnect()
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+   Serial.println(WiFi.localIP());
 }
 
 void reconnect_server() {
@@ -291,8 +389,6 @@ MPU6050 Acc_Read()
 }
 
 
-
-
 //====================================================//
 //==================ENCODE JSON FUNCTION==============//
 //====================================================//
@@ -300,13 +396,14 @@ MPU6050 Acc_Read()
 
 struct data InitJsonObject(struct data msg)
 {
-  msg.pointTime = "";
+  static const double init_lat = -7, init_lon = 100;
+  msg.pointTime = "test";
   msg.timeZone = "Asia/Jakarta";
-  msg.interval = "1000";
+  msg.interval = "500";
   msg.geometry.type = "Feature";
   msg.geometry.geo.type = "Point";
-  msg.geometry.geo.coordinates[0] = "123.6";
-  msg.geometry.geo.coordinates[1] = "123.6";
+  msg.geometry.geo.coordinates[0] = String(init_lat);
+  msg.geometry.geo.coordinates[1] = String(init_lon);
   msg.geometry.property.Name = "ITB";  
 
   return msg;
