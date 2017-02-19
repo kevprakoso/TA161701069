@@ -168,7 +168,8 @@ namespace SimplePerfChart
                             perfChart1.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
                             perfChart2.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
                         }
-                        
+                        gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(accelReport.geojson.geometry.coordinates[0]), double.Parse(accelReport.geojson.geometry.coordinates[1]));
+
                     }
                     catch (Exception ex)
                     {
