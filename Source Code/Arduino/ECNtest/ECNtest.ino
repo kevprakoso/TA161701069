@@ -1,15 +1,16 @@
 /*
- * Earthquake Catcher Network v1.0
- * Capstone Design by
- *  Christoporus Deo Putratama
- *  Kevin Shidqi
- *  Bramantio Yuwono
- * 
- * Read seismic waves using IMU sensor 
- * Read location and exact time using GPS 
- * Sending those data using Wi-Fi using MQTT
- * 
- */
+   Earthquake Catcher Network v1.0
+   Capstone Design by
+    Christoporus Deo Putratama
+    Kevin Shidqi
+    Bramantio Yuwono
+
+   Read seismic waves using IMU sensor
+   Read location and exact time using GPS
+   Sending those data using Wi-Fi using MQTT
+
+*/
+
 
 
 //====================================================//
@@ -27,12 +28,12 @@
 #define SCL_PIN D1
 #define PWR_MGMT 0x6B
 #define IMU_RES 1
-#define RXPin D5
-#define TXPin D6
-#define GPSBaud 19200
-#define SendPeriod 60000 //in ms
+#define RXPin D3
+#define TXPin D4
+#define GPSBaud 9600
+#define SendPeriod 1000 //in ms
 
-const char* TIMEZONE = "Asia/Jakarta"; 
+const char* TIMEZONE = "Asia/Jakarta";
 
 
 
@@ -40,10 +41,10 @@ const char* TIMEZONE = "Asia/Jakarta";
 //==========Connection & Database Variables===========//
 //====================================================//
 
-const char* ssid = "LSKK Basement";    //  network SSID (name) 
+const char* ssid = "LSKK Basement";    //  network SSID (name)
 const char* pass = "noiznocon";   // network password
 const char* mqtt_server = "black-boar.rmq.cloudamqp.com"; //MQTT server
-const char* server_topic = "amq.topic.ecn"; //MQTT server topic
+const char* server_topic = "amq.topic.ecn2"; //MQTT server topic
 String mqtt_clientID = "ESP8266Client-1";
 String mqtt_user = "lsowqccg:lsowqccg";
 String mqtt_password = "kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j";
@@ -61,10 +62,10 @@ int value = 0;
 //====================================================//
 
 // I2C address of the MPU-6050
-const int MPU=0x68;  
+const int MPU = 0x68;
 
-struct MPU6050{
-  uint8_t x;  
+struct MPU6050 {
+  uint8_t x;
   uint8_t y;
   uint8_t z;
 };
@@ -86,17 +87,17 @@ struct acc {
   String z;
 };
 
-struct geometry{
+struct geometry {
   String type;
   String coordinates[2];
 };
 
-struct prop{
+struct prop {
   String Name;
 };
 
 
-struct geojson{
+struct geojson {
   String type;
   geometry geo;
   prop property;
@@ -107,14 +108,14 @@ struct data {
   String timeZone;
   String interval;
   geojson geometry;
-  acc accelerations[20];   
+  acc accelerations[20];
 };
 
 struct data msg;
 
 struct data InitJsonObject(struct data msg);
 String JsonToString(struct data msg);
-int i = 0, j= 0;
+int i = 0, j = 0;
 bool checkgps = false;
 
 //====================================================//
@@ -142,7 +143,7 @@ bool checkgps = false;
 void setup()
 {
 
-    // put your setup code here, to run once:
+  // put your setup code here, to run once:
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   MPU6050_Init();
   //ss.begin(GPSBaud);
@@ -150,12 +151,12 @@ void setup()
 
 
   msg = InitJsonObject(msg);
-  
+
   delay(100);
   WiFiConnect();
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
-  
+
   Serial.begin(115200);
   ss.begin(GPSBaud);
 
@@ -168,32 +169,32 @@ void setup()
   while (!checkgps)
   {
     while (ss.available() > 0)
-    if (gps.encode(ss.read()))
-    {
-      displayInfo();
-      checkgps = true;
-    }
+      if (gps.encode(ss.read()))
+      {
+        displayInfo();
+        checkgps = true;
+      }
     if (millis() > 5000 && gps.charsProcessed() < 10)
-  {
-    Serial.println(F("No GPS detected: check wiring."));
-    while(true);
-  }    
+    {
+      Serial.println(F("No GPS detected: check wiring."));
+      while (true);
+    }
   }
-  
+
 }
 
 void loop()
 {
-  
-  
+
+
   // This sketch displays information every time a new sentence is correctly encoded.
-  
+
 
   data = Acc_Read();
   msg.accelerations[i].x = data.x;
   msg.accelerations[i].y = data.y;
   msg.accelerations[i].z = data.z;
-  
+
   i++;
   if (!client.connected()) {
     reconnect_server();
@@ -201,7 +202,7 @@ void loop()
   client.loop();
   long now = millis();
   //if (now - lstMsg > SendPeriod)
-  if(i==20)
+  if (i == 20)
   {
     i = 0;
     String YEAR = String(gps.date.year());
@@ -210,16 +211,16 @@ void loop()
     String HOUR = String(gps.time.hour());
     String MINUTE = String(gps.time.minute());
     String SECOND = String(gps.time.second());
-    msg.pointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":"+ SECOND + "Z";    
-      
+    msg.pointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":" + SECOND + "Z";
+
     //lstMsg = now;
-    String message = JsonToString(msg); 
+    String message = JsonToString(msg);
     //msg.printTo(message);
     char message_t[800];
-    message.toCharArray(message_t,800);
+    message.toCharArray(message_t, 800);
     //publish sensor data to MQTT broker
-    bool test = client.publish(server_topic, message_t);    
-    if(test)
+    bool test = client.publish(server_topic, message_t);
+    if (test)
       Serial.println("publish success");
   }
   delay(50);
@@ -227,7 +228,7 @@ void loop()
 
 void displayInfo()
 {
-  Serial.print(F("Location: ")); 
+  Serial.print(F("Location: "));
   if (gps.location.isValid())
   {
     Serial.print(gps.location.lat(), 6);
@@ -287,24 +288,24 @@ void displayInfo()
 void WiFiConnect()
 {
   // We start by connecting to a WiFi network
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
-    WiFi.begin(ssid, pass);
-    while (WiFi.status() != WL_CONNECTED) 
-    {
-      delay(500);
-      Serial.print(".");
-    }
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, pass);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
   randomSeed(micros());
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
-   Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP());
 }
 
 void reconnect_server() {
   // Loop until we're reconnected
-  while (!client.connected()) 
+  while (!client.connected())
   {
     Serial.print("Attempting MQTT connection...");
     // Create a random client ID
@@ -313,7 +314,7 @@ void reconnect_server() {
     // Attempt to connect
     //if you MQTT broker has clientID,username and password
     //please change following line to    if (client.connect(clientId,userName,passWord))
-    if (client.connect(mqtt_clientID.c_str(), mqtt_user.c_str(),mqtt_password.c_str()))
+    if (client.connect(mqtt_clientID.c_str(), mqtt_user.c_str(), mqtt_password.c_str()))
     {
       Serial.println("connected");
     } else {
@@ -326,7 +327,7 @@ void reconnect_server() {
   }
 } //end reconnect()
 
-void callback(char* topic, byte* payload, unsigned int length) 
+void callback(char* topic, byte* payload, unsigned int length)
 {
   Serial.print("Message arrived [");
   Serial.print(topic);
@@ -365,15 +366,15 @@ void MPU6050_Init()
 MPU6050 Acc_Read()
 {
   MPU6050 data;
-  
+
   Wire.beginTransmission(MPU);
   Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
   Wire.endTransmission(false);
-  Wire.requestFrom(MPU,8,true);  // request a total of 6 registers
-  data.x=(Wire.read()<<8|Wire.read())*IMU_RES;  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
-  data.y=(Wire.read()<<8|Wire.read())*IMU_RES;  // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
-  data.z=(Wire.read()<<8|Wire.read())*IMU_RES;  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
-  
+  Wire.requestFrom(MPU, 8, true); // request a total of 6 registers
+  data.x = (Wire.read() << 8 | Wire.read()) * IMU_RES; // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
+  data.y = (Wire.read() << 8 | Wire.read()) * IMU_RES; // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+  data.z = (Wire.read() << 8 | Wire.read()) * IMU_RES; // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+
   return data;
 }
 
@@ -385,7 +386,7 @@ MPU6050 Acc_Read()
 
 struct data InitJsonObject(struct data msg)
 {
-  static const double init_lat = -7, init_lon = 100;
+  static const double init_lat = -6.889916, init_lon = 107.61133;
   msg.pointTime = "test";
   msg.timeZone = "Asia/Jakarta";
   msg.interval = "500";
@@ -393,7 +394,7 @@ struct data InitJsonObject(struct data msg)
   msg.geometry.geo.type = "Point";
   msg.geometry.geo.coordinates[0] = String(init_lat);
   msg.geometry.geo.coordinates[1] = String(init_lon);
-  msg.geometry.property.Name = "ITB";  
+  msg.geometry.property.Name = "ITB";
 
   return msg;
 }
@@ -424,9 +425,9 @@ String JsonToString(struct data msg)
 
   a = a + "\"accelerations\": [";
 
-  for (int i=0; i<20; i++)
+  for (int i = 0; i < 20; i++)
   {
-    if(i != 19)
+    if (i != 19)
     {
       a = a + "{";
       a = a + "\"x\": " + msg.accelerations[i].x  + ",";
@@ -442,15 +443,15 @@ String JsonToString(struct data msg)
       a = a + "\"z\": " + msg.accelerations[i].z  ;
       a = a + "}";
     }
-    
+
   }
-  
-  
+
+
   a = a + "]";
 
   a = a + "}";
-  
-  
+
+
   return a;
 }
 
