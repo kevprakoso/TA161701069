@@ -317,6 +317,21 @@ namespace SimplePerfChart
         {
             //receive();
         }
+
+        private void perfChart4_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void perfChart6_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void perfChart_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

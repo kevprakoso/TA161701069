@@ -65,6 +65,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Keys\PerfChartDefault.snk" />
     <None Include="packages.config" />
   </ItemGroup>
