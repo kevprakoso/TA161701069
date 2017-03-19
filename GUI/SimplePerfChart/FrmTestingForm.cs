@@ -128,6 +128,8 @@ namespace SimplePerfChart
 
             factory.Protocol = Protocols.DefaultProtocol;
             factory.Port = AmqpTcpEndpoint.UseDefaultPort;
+
+            //SENSOR ecn
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
@@ -164,9 +166,9 @@ namespace SimplePerfChart
                         Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geojson.geometry.coordinates[0], accelReport.geojson.geometry.coordinates[1], accelReport.accelerations[0].x, accelReport.accelerations[0].y, accelReport.accelerations[0].z);
                         for (int i = 0 ; i < 20; i++)
                         {
-                            perfChart.AddValue((decimal)int.Parse(accelReport.accelerations[i].x));
-                            perfChart1.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
-                            perfChart2.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
+                            perfChart3.AddValue((decimal)int.Parse(accelReport.accelerations[i].x));
+                            perfChart4.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
+                            perfChart5.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
                         }
                         gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(accelReport.geojson.geometry.coordinates[0]), double.Parse(accelReport.geojson.geometry.coordinates[1]));
 
@@ -184,6 +186,124 @@ namespace SimplePerfChart
                 Console.WriteLine("Already BasicConsume");
                 //Console.ReadLine();
             }
+
+            //SENSOR ecn1
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: "ecn1", //"emergency_gui",
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+                channel.QueueBind(queue: "ecn1", //"emergency_gui",
+                                     exchange: "amq.topic",
+                                     routingKey: "amq.topic.ecn1" //emergency"
+                                     );
+
+                Console.WriteLine("Queue Declare Emergency GUI");
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body;
+                    var message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine(" [x] Received {0}", message);
+                    Console.WriteLine(" ///////////////////////////////////////////////////////////////////////////////////////////////////");
+                    data = message;
+                    //accel_data = ParsingMessage(data);
+                    try
+                    {
+                        //AccelerationReport accelReport = JsonConvert.DeserializeObject<AccelerationReport>(message);
+                        data accelReport = JsonConvert.DeserializeObject<data>(message);
+                        //Console.WriteLine("{0} {1} {2}", accel_data.accel_x, accel_data.accel_y, accel_data.accel_z);
+                        //console.writeline("{0} {1} {2} {3}", accelreport.geometry.geometry.coordinates, accelreport.accelerations[0].x, accelreport.accelerations[0].y, accelreport.accelerations[0].z);
+                        //perfchart.addvalue((decimal)accelreport.accelerations[0].x * 1000);
+                        //perfchart1.addvalue((decimal)accelreport.accelerations[0].y * 1000);
+                        //perfchart2.addvalue((decimal)accelreport.accelerations[0].z * 1000);
+                        //Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geometry.geometryData.coordinate.lon, accelReport.geometry.geometryData.coordinate.lng, accelReport.accelerations.x, accelReport.accelerations.y, accelReport.accelerations.z);
+                        Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geojson.geometry.coordinates[0], accelReport.geojson.geometry.coordinates[1], accelReport.accelerations[0].x, accelReport.accelerations[0].y, accelReport.accelerations[0].z);
+                        for (int i = 0; i < 20; i++)
+                        {
+                            perfChart6.AddValue((decimal)int.Parse(accelReport.accelerations[i].x));
+                            perfChart7.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
+                            perfChart8.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
+                        }
+                        gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(accelReport.geojson.geometry.coordinates[0]), double.Parse(accelReport.geojson.geometry.coordinates[1]));
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("ERROR: {0}", ex);
+                    }
+
+                };
+                channel.BasicConsume(queue: "ecn1", //"emergency_gui",
+                                     noAck: true,
+                                     consumer: consumer);
+
+                Console.WriteLine("Already BasicConsume");
+                //Console.ReadLine();
+            }
+
+
+            //SENSOR ecn2
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: "ecn2", //"emergency_gui",
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+                channel.QueueBind(queue: "ecn2", //"emergency_gui",
+                                     exchange: "amq.topic",
+                                     routingKey: "amq.topic.ecn2" //emergency"
+                                     );
+
+                Console.WriteLine("Queue Declare Emergency GUI");
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body;
+                    var message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine(" [x] Received {0}", message);
+                    Console.WriteLine(" ///////////////////////////////////////////////////////////////////////////////////////////////////");
+                    data = message;
+                    //accel_data = ParsingMessage(data);
+                    try
+                    {
+                        //AccelerationReport accelReport = JsonConvert.DeserializeObject<AccelerationReport>(message);
+                        data accelReport = JsonConvert.DeserializeObject<data>(message);
+                        //Console.WriteLine("{0} {1} {2}", accel_data.accel_x, accel_data.accel_y, accel_data.accel_z);
+                        //console.writeline("{0} {1} {2} {3}", accelreport.geometry.geometry.coordinates, accelreport.accelerations[0].x, accelreport.accelerations[0].y, accelreport.accelerations[0].z);
+                        //perfchart.addvalue((decimal)accelreport.accelerations[0].x * 1000);
+                        //perfchart1.addvalue((decimal)accelreport.accelerations[0].y * 1000);
+                        //perfchart2.addvalue((decimal)accelreport.accelerations[0].z * 1000);
+                        //Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geometry.geometryData.coordinate.lon, accelReport.geometry.geometryData.coordinate.lng, accelReport.accelerations.x, accelReport.accelerations.y, accelReport.accelerations.z);
+                        Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geojson.geometry.coordinates[0], accelReport.geojson.geometry.coordinates[1], accelReport.accelerations[0].x, accelReport.accelerations[0].y, accelReport.accelerations[0].z);
+                        for (int i = 0; i < 20; i++)
+                        {
+                            perfChart.AddValue((decimal)int.Parse(accelReport.accelerations[i].x));
+                            perfChart1.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
+                            perfChart2.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
+                        }
+                        gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(accelReport.geojson.geometry.coordinates[0]), double.Parse(accelReport.geojson.geometry.coordinates[1]));
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("ERROR: {0}", ex);
+                    }
+
+                };
+                channel.BasicConsume(queue: "ecn2", //"emergency_gui",
+                                     noAck: true,
+                                     consumer: consumer);
+
+                Console.WriteLine("Already BasicConsume");
+                //Console.ReadLine();
+            }
+
 
             if (chkBxTimerEnabled.Checked)
             {
@@ -332,6 +452,177 @@ namespace SimplePerfChart
         {
 
         }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            
+        }
+
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {   /*
+            //consume_data();
+            ConnectionFactory factory;
+            using (StreamReader r = new StreamReader("config1.json"))
+            {
+                string json = r.ReadToEnd();
+                Config config = JsonConvert.DeserializeObject<Config>(json);
+
+                factory = new ConnectionFactory();// { HostName = config.host, UserName = config.user, VirtualHost = config.vhost, Password = config.password };              
+                //factory.Uri = "amqp://lsowqccg:kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j@black-boar.rmq.cloudamqp.com/lsowqccg";
+                factory.Uri = "amqp://lsowqccg:kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j@black-boar.rmq.cloudamqp.com/lsowqccg";
+            }
+
+            factory.Protocol = Protocols.DefaultProtocol;
+            factory.Port = AmqpTcpEndpoint.UseDefaultPort;
+            //SENSOR ecn1
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: "ecn1", //"emergency_gui",
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+                channel.QueueBind(queue: "ecn1", //"emergency_gui",
+                                     exchange: "amq.topic",
+                                     routingKey: "amq.topic.ecn1" //emergency"
+                                     );
+
+                Console.WriteLine("Queue Declare Emergency GUI");
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body;
+                    var message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine(" [x] Received {0}", message);
+                    Console.WriteLine(" ///////////////////////////////////////////////////////////////////////////////////////////////////");
+                    data = message;
+                    //accel_data = ParsingMessage(data);
+                    try
+                    {
+                        //AccelerationReport accelReport = JsonConvert.DeserializeObject<AccelerationReport>(message);
+                        data accelReport = JsonConvert.DeserializeObject<data>(message);
+                        //Console.WriteLine("{0} {1} {2}", accel_data.accel_x, accel_data.accel_y, accel_data.accel_z);
+                        //console.writeline("{0} {1} {2} {3}", accelreport.geometry.geometry.coordinates, accelreport.accelerations[0].x, accelreport.accelerations[0].y, accelreport.accelerations[0].z);
+                        //perfchart.addvalue((decimal)accelreport.accelerations[0].x * 1000);
+                        //perfchart1.addvalue((decimal)accelreport.accelerations[0].y * 1000);
+                        //perfchart2.addvalue((decimal)accelreport.accelerations[0].z * 1000);
+                        //Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geometry.geometryData.coordinate.lon, accelReport.geometry.geometryData.coordinate.lng, accelReport.accelerations.x, accelReport.accelerations.y, accelReport.accelerations.z);
+                        Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geojson.geometry.coordinates[0], accelReport.geojson.geometry.coordinates[1], accelReport.accelerations[0].x, accelReport.accelerations[0].y, accelReport.accelerations[0].z);
+                        for (int i = 0; i < 20; i++)
+                        {
+                            perfChart6.AddValue((decimal)int.Parse(accelReport.accelerations[i].x));
+                            perfChart7.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
+                            perfChart8.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
+                        }
+                        gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(accelReport.geojson.geometry.coordinates[0]), double.Parse(accelReport.geojson.geometry.coordinates[1]));
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("ERROR: {0}", ex);
+                    }
+
+                };
+                channel.BasicConsume(queue: "ecn1", //"emergency_gui",
+                                     noAck: true,
+                                     consumer: consumer);
+
+                Console.WriteLine("Already BasicConsume");
+                //Console.ReadLine();
+            }
+            if (chkBxTimerEnabled.Checked)
+            {
+
+                RunTimer();
+            }*/
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {   /*
+            //consume_data();
+            ConnectionFactory factory;
+            using (StreamReader r = new StreamReader("config1.json"))
+            {
+                string json = r.ReadToEnd();
+                Config config = JsonConvert.DeserializeObject<Config>(json);
+
+                factory = new ConnectionFactory();// { HostName = config.host, UserName = config.user, VirtualHost = config.vhost, Password = config.password };              
+                //factory.Uri = "amqp://lsowqccg:kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j@black-boar.rmq.cloudamqp.com/lsowqccg";
+                factory.Uri = "amqp://lsowqccg:kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j@black-boar.rmq.cloudamqp.com/lsowqccg";
+            }
+
+            factory.Protocol = Protocols.DefaultProtocol;
+            factory.Port = AmqpTcpEndpoint.UseDefaultPort;
+            //SENSOR ecn2
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: "ecn2", //"emergency_gui",
+                                     durable: true,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
+                channel.QueueBind(queue: "ecn2", //"emergency_gui",
+                                     exchange: "amq.topic",
+                                     routingKey: "amq.topic.ecn2" //emergency"
+                                     );
+
+                Console.WriteLine("Queue Declare Emergency GUI");
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    var body = ea.Body;
+                    var message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine(" [x] Received {0}", message);
+                    Console.WriteLine(" ///////////////////////////////////////////////////////////////////////////////////////////////////");
+                    data = message;
+                    //accel_data = ParsingMessage(data);
+                    try
+                    {
+                        //AccelerationReport accelReport = JsonConvert.DeserializeObject<AccelerationReport>(message);
+                        data accelReport = JsonConvert.DeserializeObject<data>(message);
+                        //Console.WriteLine("{0} {1} {2}", accel_data.accel_x, accel_data.accel_y, accel_data.accel_z);
+                        //console.writeline("{0} {1} {2} {3}", accelreport.geometry.geometry.coordinates, accelreport.accelerations[0].x, accelreport.accelerations[0].y, accelreport.accelerations[0].z);
+                        //perfchart.addvalue((decimal)accelreport.accelerations[0].x * 1000);
+                        //perfchart1.addvalue((decimal)accelreport.accelerations[0].y * 1000);
+                        //perfchart2.addvalue((decimal)accelreport.accelerations[0].z * 1000);
+                        //Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geometry.geometryData.coordinate.lon, accelReport.geometry.geometryData.coordinate.lng, accelReport.accelerations.x, accelReport.accelerations.y, accelReport.accelerations.z);
+                        Console.WriteLine("{0} {1} {2} {3} {4}", accelReport.geojson.geometry.coordinates[0], accelReport.geojson.geometry.coordinates[1], accelReport.accelerations[0].x, accelReport.accelerations[0].y, accelReport.accelerations[0].z);
+                        for (int i = 0; i < 20; i++)
+                        {
+                            perfChart.AddValue((decimal)int.Parse(accelReport.accelerations[i].x));
+                            perfChart1.AddValue((decimal)int.Parse(accelReport.accelerations[i].y));
+                            perfChart2.AddValue((decimal)int.Parse(accelReport.accelerations[i].z));
+                        }
+                        gMapControl1.Position = new GMap.NET.PointLatLng(double.Parse(accelReport.geojson.geometry.coordinates[0]), double.Parse(accelReport.geojson.geometry.coordinates[1]));
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("ERROR: {0}", ex);
+                    }
+
+                };
+                channel.BasicConsume(queue: "ecn2", //"emergency_gui",
+                                     noAck: true,
+                                     consumer: consumer);
+
+                Console.WriteLine("Already BasicConsume");
+                //Console.ReadLine();
+            }
+            if (chkBxTimerEnabled.Checked)
+            {
+
+                RunTimer();
+            }*/
+        }
+
     }
 
 

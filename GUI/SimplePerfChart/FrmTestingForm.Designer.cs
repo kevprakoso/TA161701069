@@ -25,42 +25,42 @@
         /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
         /// </summary>
         private void InitializeComponent() {
-            SpPerfChart.ChartPen chartPen9 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen10 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen11 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen12 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen5 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen6 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen7 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen8 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen1 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen2 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen3 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen4 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen21 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen22 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen23 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen24 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen17 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen18 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen19 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen20 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen5 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen6 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen7 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen8 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen9 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen10 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen11 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen12 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen13 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen14 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen15 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen16 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen33 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen34 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen35 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen36 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen29 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen30 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen31 = new SpPerfChart.ChartPen();
-            SpPerfChart.ChartPen chartPen32 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen17 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen18 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen19 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen20 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen21 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen22 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen23 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen24 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen25 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen26 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen27 = new SpPerfChart.ChartPen();
             SpPerfChart.ChartPen chartPen28 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen29 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen30 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen31 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen32 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen33 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen34 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen35 = new SpPerfChart.ChartPen();
+            SpPerfChart.ChartPen chartPen36 = new SpPerfChart.ChartPen();
             this.grpBxRandVal = new System.Windows.Forms.GroupBox();
             this.chkBxTimerEnabled = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -97,26 +97,29 @@
             this.label13 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.perfChart3 = new SpPerfChart.PerfChart();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.perfChart4 = new SpPerfChart.PerfChart();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.perfChart5 = new SpPerfChart.PerfChart();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.perfChart6 = new SpPerfChart.PerfChart();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.perfChart7 = new SpPerfChart.PerfChart();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.perfChart4 = new SpPerfChart.PerfChart();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.perfChart3 = new SpPerfChart.PerfChart();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.perfChart8 = new SpPerfChart.PerfChart();
-            this.grpBxChart = new System.Windows.Forms.GroupBox();
-            this.perfChart = new SpPerfChart.PerfChart();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.perfChart1 = new SpPerfChart.PerfChart();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.perfChart7 = new SpPerfChart.PerfChart();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.perfChart6 = new SpPerfChart.PerfChart();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.perfChart2 = new SpPerfChart.PerfChart();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.perfChart1 = new SpPerfChart.PerfChart();
+            this.grpBxChart = new System.Windows.Forms.GroupBox();
+            this.perfChart = new SpPerfChart.PerfChart();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.grpBxRandVal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDnToInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDnFromInterval)).BeginInit();
@@ -128,17 +131,17 @@
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox9.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            this.grpBxChart.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.grpBxChart.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBxRandVal
@@ -474,6 +477,7 @@
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 18;
             this.gMapControl1.MinZoom = 0;
+            this.gMapControl1.MouseWheelZoomEnabled = true;
             this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             this.gMapControl1.Name = "gMapControl1";
             this.gMapControl1.NegativeMode = false;
@@ -560,76 +564,50 @@
             this.tabPage1.Text = "ECN";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // groupBox7
             // 
-            this.tabPage2.Controls.Add(this.groupBox10);
-            this.tabPage2.Controls.Add(this.groupBox9);
-            this.tabPage2.Controls.Add(this.groupBox8);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(263, 606);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ECN1";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.groupBox7.Controls.Add(this.perfChart5);
+            this.groupBox7.Location = new System.Drawing.Point(0, 385);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox7.Size = new System.Drawing.Size(259, 141);
+            this.groupBox7.TabIndex = 10;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Z Axis";
             // 
-            // tabPage3
+            // perfChart5
             // 
-            this.tabPage3.Controls.Add(this.groupBox4);
-            this.tabPage3.Controls.Add(this.groupBox3);
-            this.tabPage3.Controls.Add(this.grpBxChart);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(263, 606);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "ECN2";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.perfChart3);
-            this.groupBox5.Location = new System.Drawing.Point(1, 35);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox5.Size = new System.Drawing.Size(259, 141);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "X Axis";
-            // 
-            // perfChart3
-            // 
-            this.perfChart3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.perfChart3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            this.perfChart3.Location = new System.Drawing.Point(6, 19);
-            this.perfChart3.Name = "perfChart3";
-            this.perfChart3.PerfChartStyle.AntiAliasing = true;
-            chartPen9.Color = System.Drawing.Color.LightGreen;
-            chartPen9.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            chartPen9.Width = 1F;
-            this.perfChart3.PerfChartStyle.AvgLinePen = chartPen9;
-            this.perfChart3.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
-            this.perfChart3.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
-            chartPen10.Color = System.Drawing.Color.Gold;
-            chartPen10.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartPen10.Width = 1F;
-            this.perfChart3.PerfChartStyle.ChartLinePen = chartPen10;
-            chartPen11.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen11.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen11.Width = 1F;
-            this.perfChart3.PerfChartStyle.HorizontalGridPen = chartPen11;
-            this.perfChart3.PerfChartStyle.ShowAverageLine = true;
-            this.perfChart3.PerfChartStyle.ShowHorizontalGridLines = true;
-            this.perfChart3.PerfChartStyle.ShowVerticalGridLines = true;
-            chartPen12.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen12.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen12.Width = 1F;
-            this.perfChart3.PerfChartStyle.VerticalGridPen = chartPen12;
-            this.perfChart3.ScaleMode = SpPerfChart.ScaleMode.Relative;
-            this.perfChart3.Size = new System.Drawing.Size(247, 116);
-            this.perfChart3.TabIndex = 0;
-            this.perfChart3.TimerInterval = 100;
-            this.perfChart3.TimerMode = SpPerfChart.TimerMode.Disabled;
+            this.perfChart5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.perfChart5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.perfChart5.Location = new System.Drawing.Point(6, 19);
+            this.perfChart5.Name = "perfChart5";
+            this.perfChart5.PerfChartStyle.AntiAliasing = true;
+            chartPen1.Color = System.Drawing.Color.LightGreen;
+            chartPen1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            chartPen1.Width = 1F;
+            this.perfChart5.PerfChartStyle.AvgLinePen = chartPen1;
+            this.perfChart5.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
+            this.perfChart5.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
+            chartPen2.Color = System.Drawing.Color.Gold;
+            chartPen2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartPen2.Width = 1F;
+            this.perfChart5.PerfChartStyle.ChartLinePen = chartPen2;
+            chartPen3.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen3.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen3.Width = 1F;
+            this.perfChart5.PerfChartStyle.HorizontalGridPen = chartPen3;
+            this.perfChart5.PerfChartStyle.ShowAverageLine = true;
+            this.perfChart5.PerfChartStyle.ShowHorizontalGridLines = true;
+            this.perfChart5.PerfChartStyle.ShowVerticalGridLines = true;
+            chartPen4.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen4.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen4.Width = 1F;
+            this.perfChart5.PerfChartStyle.VerticalGridPen = chartPen4;
+            this.perfChart5.ScaleMode = SpPerfChart.ScaleMode.Relative;
+            this.perfChart5.Size = new System.Drawing.Size(247, 116);
+            this.perfChart5.TabIndex = 0;
+            this.perfChart5.TimerInterval = 100;
+            this.perfChart5.TimerMode = SpPerfChart.TimerMode.Disabled;
             // 
             // groupBox6
             // 
@@ -676,50 +654,153 @@
             this.perfChart4.TimerInterval = 100;
             this.perfChart4.TimerMode = SpPerfChart.TimerMode.Disabled;
             // 
-            // groupBox7
+            // groupBox5
             // 
-            this.groupBox7.Controls.Add(this.perfChart5);
-            this.groupBox7.Location = new System.Drawing.Point(0, 385);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox7.Size = new System.Drawing.Size(259, 141);
-            this.groupBox7.TabIndex = 10;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Z Axis";
+            this.groupBox5.Controls.Add(this.perfChart3);
+            this.groupBox5.Location = new System.Drawing.Point(1, 35);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox5.Size = new System.Drawing.Size(259, 141);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "X Axis";
             // 
-            // perfChart5
+            // perfChart3
             // 
-            this.perfChart5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.perfChart5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            this.perfChart5.Location = new System.Drawing.Point(6, 19);
-            this.perfChart5.Name = "perfChart5";
-            this.perfChart5.PerfChartStyle.AntiAliasing = true;
-            chartPen1.Color = System.Drawing.Color.LightGreen;
-            chartPen1.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            chartPen1.Width = 1F;
-            this.perfChart5.PerfChartStyle.AvgLinePen = chartPen1;
-            this.perfChart5.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
-            this.perfChart5.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
-            chartPen2.Color = System.Drawing.Color.Gold;
-            chartPen2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartPen2.Width = 1F;
-            this.perfChart5.PerfChartStyle.ChartLinePen = chartPen2;
-            chartPen3.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen3.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen3.Width = 1F;
-            this.perfChart5.PerfChartStyle.HorizontalGridPen = chartPen3;
-            this.perfChart5.PerfChartStyle.ShowAverageLine = true;
-            this.perfChart5.PerfChartStyle.ShowHorizontalGridLines = true;
-            this.perfChart5.PerfChartStyle.ShowVerticalGridLines = true;
-            chartPen4.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen4.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen4.Width = 1F;
-            this.perfChart5.PerfChartStyle.VerticalGridPen = chartPen4;
-            this.perfChart5.ScaleMode = SpPerfChart.ScaleMode.Relative;
-            this.perfChart5.Size = new System.Drawing.Size(247, 116);
-            this.perfChart5.TabIndex = 0;
-            this.perfChart5.TimerInterval = 100;
-            this.perfChart5.TimerMode = SpPerfChart.TimerMode.Disabled;
+            this.perfChart3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.perfChart3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.perfChart3.Location = new System.Drawing.Point(6, 19);
+            this.perfChart3.Name = "perfChart3";
+            this.perfChart3.PerfChartStyle.AntiAliasing = true;
+            chartPen9.Color = System.Drawing.Color.LightGreen;
+            chartPen9.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            chartPen9.Width = 1F;
+            this.perfChart3.PerfChartStyle.AvgLinePen = chartPen9;
+            this.perfChart3.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
+            this.perfChart3.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
+            chartPen10.Color = System.Drawing.Color.Gold;
+            chartPen10.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartPen10.Width = 1F;
+            this.perfChart3.PerfChartStyle.ChartLinePen = chartPen10;
+            chartPen11.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen11.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen11.Width = 1F;
+            this.perfChart3.PerfChartStyle.HorizontalGridPen = chartPen11;
+            this.perfChart3.PerfChartStyle.ShowAverageLine = true;
+            this.perfChart3.PerfChartStyle.ShowHorizontalGridLines = true;
+            this.perfChart3.PerfChartStyle.ShowVerticalGridLines = true;
+            chartPen12.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen12.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen12.Width = 1F;
+            this.perfChart3.PerfChartStyle.VerticalGridPen = chartPen12;
+            this.perfChart3.ScaleMode = SpPerfChart.ScaleMode.Relative;
+            this.perfChart3.Size = new System.Drawing.Size(247, 116);
+            this.perfChart3.TabIndex = 0;
+            this.perfChart3.TimerInterval = 100;
+            this.perfChart3.TimerMode = SpPerfChart.TimerMode.Disabled;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox10);
+            this.tabPage2.Controls.Add(this.groupBox9);
+            this.tabPage2.Controls.Add(this.groupBox8);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(263, 606);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "ECN1";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.perfChart8);
+            this.groupBox10.Location = new System.Drawing.Point(1, 377);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox10.Size = new System.Drawing.Size(259, 141);
+            this.groupBox10.TabIndex = 10;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Z Axis";
+            // 
+            // perfChart8
+            // 
+            this.perfChart8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.perfChart8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.perfChart8.Location = new System.Drawing.Point(6, 19);
+            this.perfChart8.Name = "perfChart8";
+            this.perfChart8.PerfChartStyle.AntiAliasing = true;
+            chartPen13.Color = System.Drawing.Color.LightGreen;
+            chartPen13.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            chartPen13.Width = 1F;
+            this.perfChart8.PerfChartStyle.AvgLinePen = chartPen13;
+            this.perfChart8.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
+            this.perfChart8.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
+            chartPen14.Color = System.Drawing.Color.Gold;
+            chartPen14.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartPen14.Width = 1F;
+            this.perfChart8.PerfChartStyle.ChartLinePen = chartPen14;
+            chartPen15.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen15.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen15.Width = 1F;
+            this.perfChart8.PerfChartStyle.HorizontalGridPen = chartPen15;
+            this.perfChart8.PerfChartStyle.ShowAverageLine = true;
+            this.perfChart8.PerfChartStyle.ShowHorizontalGridLines = true;
+            this.perfChart8.PerfChartStyle.ShowVerticalGridLines = true;
+            chartPen16.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen16.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen16.Width = 1F;
+            this.perfChart8.PerfChartStyle.VerticalGridPen = chartPen16;
+            this.perfChart8.ScaleMode = SpPerfChart.ScaleMode.Relative;
+            this.perfChart8.Size = new System.Drawing.Size(247, 116);
+            this.perfChart8.TabIndex = 0;
+            this.perfChart8.TimerInterval = 100;
+            this.perfChart8.TimerMode = SpPerfChart.TimerMode.Disabled;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.perfChart7);
+            this.groupBox9.Location = new System.Drawing.Point(1, 201);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox9.Size = new System.Drawing.Size(259, 141);
+            this.groupBox9.TabIndex = 9;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Y Axis";
+            // 
+            // perfChart7
+            // 
+            this.perfChart7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.perfChart7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.perfChart7.Location = new System.Drawing.Point(6, 19);
+            this.perfChart7.Name = "perfChart7";
+            this.perfChart7.PerfChartStyle.AntiAliasing = true;
+            chartPen17.Color = System.Drawing.Color.LightGreen;
+            chartPen17.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            chartPen17.Width = 1F;
+            this.perfChart7.PerfChartStyle.AvgLinePen = chartPen17;
+            this.perfChart7.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
+            this.perfChart7.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
+            chartPen18.Color = System.Drawing.Color.Gold;
+            chartPen18.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartPen18.Width = 1F;
+            this.perfChart7.PerfChartStyle.ChartLinePen = chartPen18;
+            chartPen19.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen19.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen19.Width = 1F;
+            this.perfChart7.PerfChartStyle.HorizontalGridPen = chartPen19;
+            this.perfChart7.PerfChartStyle.ShowAverageLine = true;
+            this.perfChart7.PerfChartStyle.ShowHorizontalGridLines = true;
+            this.perfChart7.PerfChartStyle.ShowVerticalGridLines = true;
+            chartPen20.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen20.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen20.Width = 1F;
+            this.perfChart7.PerfChartStyle.VerticalGridPen = chartPen20;
+            this.perfChart7.ScaleMode = SpPerfChart.ScaleMode.Relative;
+            this.perfChart7.Size = new System.Drawing.Size(247, 116);
+            this.perfChart7.TabIndex = 0;
+            this.perfChart7.TimerInterval = 100;
+            this.perfChart7.TimerMode = SpPerfChart.TimerMode.Disabled;
             // 
             // groupBox8
             // 
@@ -767,95 +848,108 @@
             this.perfChart6.TimerMode = SpPerfChart.TimerMode.Disabled;
             this.perfChart6.Load += new System.EventHandler(this.perfChart6_Load);
             // 
-            // groupBox9
+            // tabPage3
             // 
-            this.groupBox9.Controls.Add(this.perfChart7);
-            this.groupBox9.Location = new System.Drawing.Point(1, 201);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox9.Size = new System.Drawing.Size(259, 141);
-            this.groupBox9.TabIndex = 9;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Y Axis";
+            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Controls.Add(this.grpBxChart);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(263, 606);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "ECN2";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // perfChart7
+            // groupBox4
             // 
-            this.perfChart7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.perfChart7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            this.perfChart7.Location = new System.Drawing.Point(6, 19);
-            this.perfChart7.Name = "perfChart7";
-            this.perfChart7.PerfChartStyle.AntiAliasing = true;
-            chartPen17.Color = System.Drawing.Color.LightGreen;
-            chartPen17.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            chartPen17.Width = 1F;
-            this.perfChart7.PerfChartStyle.AvgLinePen = chartPen17;
-            this.perfChart7.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
-            this.perfChart7.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
-            chartPen18.Color = System.Drawing.Color.Gold;
-            chartPen18.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartPen18.Width = 1F;
-            this.perfChart7.PerfChartStyle.ChartLinePen = chartPen18;
-            chartPen19.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen19.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen19.Width = 1F;
-            this.perfChart7.PerfChartStyle.HorizontalGridPen = chartPen19;
-            this.perfChart7.PerfChartStyle.ShowAverageLine = true;
-            this.perfChart7.PerfChartStyle.ShowHorizontalGridLines = true;
-            this.perfChart7.PerfChartStyle.ShowVerticalGridLines = true;
-            chartPen20.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen20.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen20.Width = 1F;
-            this.perfChart7.PerfChartStyle.VerticalGridPen = chartPen20;
-            this.perfChart7.ScaleMode = SpPerfChart.ScaleMode.Relative;
-            this.perfChart7.Size = new System.Drawing.Size(247, 116);
-            this.perfChart7.TabIndex = 0;
-            this.perfChart7.TimerInterval = 100;
-            this.perfChart7.TimerMode = SpPerfChart.TimerMode.Disabled;
+            this.groupBox4.Controls.Add(this.perfChart2);
+            this.groupBox4.Location = new System.Drawing.Point(1, 405);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox4.Size = new System.Drawing.Size(259, 141);
+            this.groupBox4.TabIndex = 10;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Z Axis";
             // 
-            // groupBox10
+            // perfChart2
             // 
-            this.groupBox10.Controls.Add(this.perfChart8);
-            this.groupBox10.Location = new System.Drawing.Point(1, 377);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox10.Size = new System.Drawing.Size(259, 141);
-            this.groupBox10.TabIndex = 10;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Z Axis";
+            this.perfChart2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.perfChart2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.perfChart2.Location = new System.Drawing.Point(6, 19);
+            this.perfChart2.Name = "perfChart2";
+            this.perfChart2.PerfChartStyle.AntiAliasing = true;
+            chartPen25.Color = System.Drawing.Color.LightGreen;
+            chartPen25.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            chartPen25.Width = 1F;
+            this.perfChart2.PerfChartStyle.AvgLinePen = chartPen25;
+            this.perfChart2.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
+            this.perfChart2.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
+            chartPen26.Color = System.Drawing.Color.Gold;
+            chartPen26.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartPen26.Width = 1F;
+            this.perfChart2.PerfChartStyle.ChartLinePen = chartPen26;
+            chartPen27.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen27.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen27.Width = 1F;
+            this.perfChart2.PerfChartStyle.HorizontalGridPen = chartPen27;
+            this.perfChart2.PerfChartStyle.ShowAverageLine = true;
+            this.perfChart2.PerfChartStyle.ShowHorizontalGridLines = true;
+            this.perfChart2.PerfChartStyle.ShowVerticalGridLines = true;
+            chartPen28.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen28.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen28.Width = 1F;
+            this.perfChart2.PerfChartStyle.VerticalGridPen = chartPen28;
+            this.perfChart2.ScaleMode = SpPerfChart.ScaleMode.Relative;
+            this.perfChart2.Size = new System.Drawing.Size(247, 116);
+            this.perfChart2.TabIndex = 0;
+            this.perfChart2.TimerInterval = 100;
+            this.perfChart2.TimerMode = SpPerfChart.TimerMode.Disabled;
             // 
-            // perfChart8
+            // groupBox3
             // 
-            this.perfChart8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.perfChart8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            this.perfChart8.Location = new System.Drawing.Point(6, 19);
-            this.perfChart8.Name = "perfChart8";
-            this.perfChart8.PerfChartStyle.AntiAliasing = true;
-            chartPen13.Color = System.Drawing.Color.LightGreen;
-            chartPen13.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            chartPen13.Width = 1F;
-            this.perfChart8.PerfChartStyle.AvgLinePen = chartPen13;
-            this.perfChart8.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
-            this.perfChart8.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
-            chartPen14.Color = System.Drawing.Color.Gold;
-            chartPen14.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartPen14.Width = 1F;
-            this.perfChart8.PerfChartStyle.ChartLinePen = chartPen14;
-            chartPen15.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen15.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen15.Width = 1F;
-            this.perfChart8.PerfChartStyle.HorizontalGridPen = chartPen15;
-            this.perfChart8.PerfChartStyle.ShowAverageLine = true;
-            this.perfChart8.PerfChartStyle.ShowHorizontalGridLines = true;
-            this.perfChart8.PerfChartStyle.ShowVerticalGridLines = true;
-            chartPen16.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen16.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen16.Width = 1F;
-            this.perfChart8.PerfChartStyle.VerticalGridPen = chartPen16;
-            this.perfChart8.ScaleMode = SpPerfChart.ScaleMode.Relative;
-            this.perfChart8.Size = new System.Drawing.Size(247, 116);
-            this.perfChart8.TabIndex = 0;
-            this.perfChart8.TimerInterval = 100;
-            this.perfChart8.TimerMode = SpPerfChart.TimerMode.Disabled;
+            this.groupBox3.Controls.Add(this.perfChart1);
+            this.groupBox3.Location = new System.Drawing.Point(2, 233);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Size = new System.Drawing.Size(259, 141);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Y Axis";
+            // 
+            // perfChart1
+            // 
+            this.perfChart1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.perfChart1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.perfChart1.Location = new System.Drawing.Point(6, 19);
+            this.perfChart1.Name = "perfChart1";
+            this.perfChart1.PerfChartStyle.AntiAliasing = true;
+            chartPen29.Color = System.Drawing.Color.LightGreen;
+            chartPen29.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            chartPen29.Width = 1F;
+            this.perfChart1.PerfChartStyle.AvgLinePen = chartPen29;
+            this.perfChart1.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
+            this.perfChart1.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
+            chartPen30.Color = System.Drawing.Color.Gold;
+            chartPen30.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartPen30.Width = 1F;
+            this.perfChart1.PerfChartStyle.ChartLinePen = chartPen30;
+            chartPen31.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen31.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen31.Width = 1F;
+            this.perfChart1.PerfChartStyle.HorizontalGridPen = chartPen31;
+            this.perfChart1.PerfChartStyle.ShowAverageLine = true;
+            this.perfChart1.PerfChartStyle.ShowHorizontalGridLines = true;
+            this.perfChart1.PerfChartStyle.ShowVerticalGridLines = true;
+            chartPen32.Color = System.Drawing.Color.DarkOliveGreen;
+            chartPen32.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartPen32.Width = 1F;
+            this.perfChart1.PerfChartStyle.VerticalGridPen = chartPen32;
+            this.perfChart1.ScaleMode = SpPerfChart.ScaleMode.Relative;
+            this.perfChart1.Size = new System.Drawing.Size(247, 116);
+            this.perfChart1.TabIndex = 0;
+            this.perfChart1.TimerInterval = 100;
+            this.perfChart1.TimerMode = SpPerfChart.TimerMode.Disabled;
             // 
             // grpBxChart
             // 
@@ -903,95 +997,15 @@
             this.perfChart.TimerMode = SpPerfChart.TimerMode.Disabled;
             this.perfChart.Load += new System.EventHandler(this.perfChart_Load_1);
             // 
-            // groupBox3
+            // backgroundWorker1
             // 
-            this.groupBox3.Controls.Add(this.perfChart1);
-            this.groupBox3.Location = new System.Drawing.Point(2, 233);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox3.Size = new System.Drawing.Size(259, 141);
-            this.groupBox3.TabIndex = 9;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Y Axis";
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // perfChart1
+            // backgroundWorker2
             // 
-            this.perfChart1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.perfChart1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            this.perfChart1.Location = new System.Drawing.Point(6, 19);
-            this.perfChart1.Name = "perfChart1";
-            this.perfChart1.PerfChartStyle.AntiAliasing = true;
-            chartPen29.Color = System.Drawing.Color.LightGreen;
-            chartPen29.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            chartPen29.Width = 1F;
-            this.perfChart1.PerfChartStyle.AvgLinePen = chartPen29;
-            this.perfChart1.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
-            this.perfChart1.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
-            chartPen30.Color = System.Drawing.Color.Gold;
-            chartPen30.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartPen30.Width = 1F;
-            this.perfChart1.PerfChartStyle.ChartLinePen = chartPen30;
-            chartPen31.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen31.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen31.Width = 1F;
-            this.perfChart1.PerfChartStyle.HorizontalGridPen = chartPen31;
-            this.perfChart1.PerfChartStyle.ShowAverageLine = true;
-            this.perfChart1.PerfChartStyle.ShowHorizontalGridLines = true;
-            this.perfChart1.PerfChartStyle.ShowVerticalGridLines = true;
-            chartPen32.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen32.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen32.Width = 1F;
-            this.perfChart1.PerfChartStyle.VerticalGridPen = chartPen32;
-            this.perfChart1.ScaleMode = SpPerfChart.ScaleMode.Relative;
-            this.perfChart1.Size = new System.Drawing.Size(247, 116);
-            this.perfChart1.TabIndex = 0;
-            this.perfChart1.TimerInterval = 100;
-            this.perfChart1.TimerMode = SpPerfChart.TimerMode.Disabled;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.perfChart2);
-            this.groupBox4.Location = new System.Drawing.Point(1, 405);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox4.Size = new System.Drawing.Size(259, 141);
-            this.groupBox4.TabIndex = 10;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Z Axis";
-            // 
-            // perfChart2
-            // 
-            this.perfChart2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.perfChart2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
-            this.perfChart2.Location = new System.Drawing.Point(6, 19);
-            this.perfChart2.Name = "perfChart2";
-            this.perfChart2.PerfChartStyle.AntiAliasing = true;
-            chartPen25.Color = System.Drawing.Color.LightGreen;
-            chartPen25.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            chartPen25.Width = 1F;
-            this.perfChart2.PerfChartStyle.AvgLinePen = chartPen25;
-            this.perfChart2.PerfChartStyle.BackgroundColorBottom = System.Drawing.Color.DarkOliveGreen;
-            this.perfChart2.PerfChartStyle.BackgroundColorTop = System.Drawing.Color.YellowGreen;
-            chartPen26.Color = System.Drawing.Color.Gold;
-            chartPen26.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartPen26.Width = 1F;
-            this.perfChart2.PerfChartStyle.ChartLinePen = chartPen26;
-            chartPen27.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen27.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen27.Width = 1F;
-            this.perfChart2.PerfChartStyle.HorizontalGridPen = chartPen27;
-            this.perfChart2.PerfChartStyle.ShowAverageLine = true;
-            this.perfChart2.PerfChartStyle.ShowHorizontalGridLines = true;
-            this.perfChart2.PerfChartStyle.ShowVerticalGridLines = true;
-            chartPen28.Color = System.Drawing.Color.DarkOliveGreen;
-            chartPen28.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            chartPen28.Width = 1F;
-            this.perfChart2.PerfChartStyle.VerticalGridPen = chartPen28;
-            this.perfChart2.ScaleMode = SpPerfChart.ScaleMode.Relative;
-            this.perfChart2.Size = new System.Drawing.Size(247, 116);
-            this.perfChart2.TabIndex = 0;
-            this.perfChart2.TimerInterval = 100;
-            this.perfChart2.TimerMode = SpPerfChart.TimerMode.Disabled;
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
             // 
             // FrmTestingForm
             // 
@@ -1031,17 +1045,17 @@
             this.groupBox2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
-            this.grpBxChart.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.grpBxChart.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1104,5 +1118,8 @@
         private SpPerfChart.PerfChart perfChart1;
         private System.Windows.Forms.GroupBox grpBxChart;
         private SpPerfChart.PerfChart perfChart;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker3;
     }
 }
