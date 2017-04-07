@@ -23,8 +23,8 @@
 #include <TinyGPS++.h>
 #include <ArduinoJson.h>
 
-#define SDA_PIN D2
-#define SCL_PIN D1
+#define SDA_PIN D1
+#define SCL_PIN D2
 #define PWR_MGMT 0x6B
 #define RXPin D3
 #define TXPin D4
@@ -34,19 +34,21 @@
 const char* TIMEZONE = "Asia/Jakarta";
 const char* PROP = "ITB";
 const char* TYPE = "Point";
+const String SensorID = "1";
 const int SendPeriod = 1000; //in ms
-const float IMU_RES = 1.7;
-
+const int WaitGPS = 10;
+//Initial Coordinate
+static const double init_lat = -6.889916, init_lon = 107.61133;
 
 //====================================================//
 //==========Connection & Database Variables===========//
 //====================================================//
 
-const char* ssid = "LSKK Basement";    //  network SSID (name)
-const char* pass = "noiznocon";   // network password
+const char* ssid = "TU Sostek";    //  network SSID (name)
+const char* pass = "gatauudahdiganti";   // network password
 const char* mqtt_server = "black-boar.rmq.cloudamqp.com"; //MQTT server
 const char* server_topic = "amq.topic.ecn"; //MQTT server topic
-String mqtt_clientID = "ECN-1";
+String mqtt_clientID = "ECN-" + SensorID;
 String mqtt_user = "lsowqccg:lsowqccg";
 String mqtt_password = "kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j";
 int status = WL_IDLE_STATUS;
@@ -58,12 +60,46 @@ PubSubClient client(espClient);
 //====================================================//
 
 // I2C address of the MPU-9255
-const int MPU = 0x68;
+#define    MPU9250_ADDRESS            0x68
+#define    MAG_ADDRESS                0x0C
+
+#define    ACC_FULL_SCALE_2_G        0x00  
+#define    ACC_FULL_SCALE_4_G        0x08
+#define    ACC_FULL_SCALE_8_G        0x10
+#define    ACC_FULL_SCALE_16_G       0x18
+
+#define    ACC_FILTER_OFF            0x08
+
+const float ACC_RES = 6.10388817677e-05;
+const float MAG_RES = 0.149540696432;
+const float G = 9.8;
+
+float axg = 0.0;
+float ayg = 0.0;
+float azg = 0.0;
+
+float axgf = 0.0;
+float aygf = 0.0;
+float azgf = 0.0;
+
+float mxt = 0.0;
+float myt = 0.0;
+float mzt = 0.0;
+
+float mxtf = 0.0;
+float mytf = 0.0;
+float mztf = 0.0;
+
+float temperaturG = 0.0;
 
 struct MPU9255 {
   float x;
   float y;
   float z;
+  float temp;
+  float magx;
+  float magy;
+  float magz;
 };
 
 MPU9255 data;
@@ -74,7 +110,7 @@ TinyGPSPlus gps;
 // The serial connection to the GPS device
 SoftwareSerial ss(RXPin, TXPin);
 
-static const double init_lat = -6.889916, init_lon = 107.61133;
+
 //===================================================//
 //===================JSON OBJECT=====================//
 //===================================================//
@@ -116,7 +152,7 @@ void setup()
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.println();
   ss.begin(GPSBaud);
 
@@ -130,7 +166,7 @@ void setup()
         checkgps = true;
       }
     }
-    if (millis() > 5000 && gps.charsProcessed() < 10)
+    if (millis() > WaitGPS*SendPeriod && gps.charsProcessed() < 10)
     {
       payload_data.coordinates[0] = String(init_lat);
       payload_data.coordinates[1] = String(init_lon);
@@ -151,7 +187,10 @@ void loop()
   }
   else
   {
+    long now = millis();
     data = Acc_Read();
+    long t_imu = millis() - now ;
+    yield();
     payload_data.acc[i].x = String(data.x,4);
     payload_data.acc[i].y = String(data.y,4);
     payload_data.acc[i].z = String(data.z,4);
@@ -169,16 +208,16 @@ void loop()
       payload_data.PointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":" + SECOND + "Z";
       
       String message = JsonToString(payload_data,payload_setting);
-      char message_t[2048];
-      message.toCharArray(message_t, 2048);
+      char message_t[MQTT_MAX_PACKET_SIZE];
+      message.toCharArray(message_t, MQTT_MAX_PACKET_SIZE);
       
       bool test = client.publish(server_topic, message_t);
       if(test)
         Serial.println("publish success");
     }
-    delay(SendPeriod/NData);
+    delay((SendPeriod/NData)-t_imu);
   }
-  yield();
+  
 }
 
 //====================================================//
@@ -202,8 +241,8 @@ String JsonToString(struct MessageData msg, struct SensorSetting set)
 
   a = a + "{" + " \"pointTime\": " +  "\"" + msg.PointTime + "\"" + ",";
   a = a + "\"timeZone\":" + "\"" + set.TimeZone + "\"" + ",";
-  a = a + "\"interval\":" + set.Interval  + ",";
-  a = a + "\"clientID\":" + set.ClientID  + ",";
+  a = a + "\"interval\":" + "\"" + set.Interval  + "\"" + ",";
+  a = a + "\"clientID\":" + "\"" + set.ClientID  + "\"" + ",";
   a = a + "\"geojson\" :" + "{";
 
   //a = a + "\"type\":" + "\"" + msg.geometry.type + "\"" + ",";
@@ -271,7 +310,7 @@ void reconnect_server() {
   // Loop until we're reconnected
   while (!client.connected())
   {
-    Serial.print("Attempting MQTT connection...");
+//    Serial.print("Attempting MQTT connection...");
     // Attempt to connect
     //if you MQTT broker has clientID,username and password
     //please change following line to    if (client.connect(clientId,userName,passWord))
@@ -284,7 +323,7 @@ void reconnect_server() {
       Serial.print(" try again in" );
       Serial.print(String(SendPeriod));
       Serial.println("5 seconds");
-      // Wait 1 Period before retrying
+      // Wait 1 Sending Period before retrying
       delay(SendPeriod);
     }
   }
@@ -299,14 +338,68 @@ void callback(char* topic, byte* payload, unsigned int length)
 //====================================================//
 //==============IMU & GPS Function Procedure==========//
 //====================================================//
+// Tiefpassfilter
+
+double Filter(double In, double OutLPS, int FZK)
+{
+  if(FZK > 0)
+  {
+    double schritt1 = OutLPS - In;
+    double schritt2 = 1.0/FZK;
+    double schritt3 = schritt1 * schritt2;
+    double wert = OutLPS - schritt3;
+    
+    return wert;
+  }
+  else
+  {
+    return (In);
+  }
+}                 
+
+// This function read Nbytes bytes from I2C device at address Address. 
+// Put read bytes starting at register Register in the Data array. 
+void I2Cread(uint8_t Address, uint8_t Register, uint8_t Nbytes, uint8_t* Data)
+{
+  // Set register address
+  Wire.beginTransmission(Address);
+  Wire.write(Register);
+  Wire.endTransmission();
+  
+  // Read Nbytes
+  Wire.requestFrom(Address, Nbytes); 
+  uint8_t index=0;
+  while (Wire.available())
+    Data[index++]=Wire.read();
+}
+
+
+// Write a byte (Data) in device (Address) at register (Register)
+void I2CwriteByte(uint8_t Address, uint8_t Register, uint8_t Data)
+{
+  // Set register address
+  Wire.beginTransmission(Address);
+  Wire.write(Register);
+  Wire.write(Data);
+  Wire.endTransmission();
+}
 
 void MPU9255_Init()
 {
-  Wire.begin(SDA_PIN, SCL_PIN); // sda, scl
-  Wire.beginTransmission(MPU);
-  Wire.write(PWR_MGMT);  // PWR_MGMT_1 register
-  Wire.write(0);     // set to zero (wakes up the MPU-6050)
-  Wire.endTransmission(true);
+  Wire.begin(SDA_PIN,SCL_PIN);
+  
+  // Set accelerometers low pass filter at 5Hz
+  I2CwriteByte(MPU9250_ADDRESS,29,0x06);
+
+  // Configure accelerometers range
+  I2CwriteByte(MPU9250_ADDRESS,28,ACC_FULL_SCALE_2_G);
+  // accelerometers low pass filter off
+  I2CwriteByte(MPU9250_ADDRESS,29,ACC_FILTER_OFF);
+  // Set by pass mode for the magnetometers
+  I2CwriteByte(MPU9250_ADDRESS,0x37,0x02);
+  
+  // Request continuous magnetometer measurements in 16 bits
+  I2CwriteByte(MAG_ADDRESS,0x0A,0x16);
 
 }
 
@@ -314,13 +407,93 @@ struct MPU9255 Acc_Read()
 {
   struct MPU9255 data;
 
-  Wire.beginTransmission(MPU);
-  Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
-  Wire.endTransmission(false);
-  Wire.requestFrom(MPU, 8, true); // request a total of 6 registers
-  data.x = (float)(Wire.read() << 8 | Wire.read()) * IMU_RES; // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)
-  data.y = (float)(Wire.read() << 8 | Wire.read()) * IMU_RES; // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
-  data.z = (float)(Wire.read() << 8 | Wire.read()) * IMU_RES; // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+  // ____________________________________
+  // :::  accelerometer and gyroscope ::: 
+
+  // Read accelerometer and gyroscope
+  uint8_t Buf[14];
+  I2Cread(MPU9250_ADDRESS,0x3B,8,Buf);
+  
+  // Create 16 bits values from 8 bits data
+  
+  // Accelerometer
+  int16_t ax=Buf[0]<<8 | Buf[1];
+  int16_t ay=Buf[2]<<8 | Buf[3];
+  int16_t az=Buf[4]<<8 | Buf[5];
+
+  // Temperatur
+  int16_t temperatur=Buf[6]<<8 | Buf[7];
+
+  //Acc in G
+  axg = ax * ACC_RES;
+  ayg = ay * ACC_RES;
+  azg = az * ACC_RES;
+
+  axgf = Filter(axg,axgf,30);
+  aygf = Filter(ayg,aygf,30);
+  azgf = Filter(azg,azgf,30);
+
+  // Temp in Grad
+  
+  temperaturG = temperatur * 1;
+  temperaturG = temperaturG / 100;
+
+  // _____________________
+  // :::  Magnetometer ::: 
+
+  
+  // Read register Status 1 and wait for the DRDY: Data Ready
+  
+  uint8_t ST1;
+  do
+  {
+    I2Cread(MAG_ADDRESS,0x02,1,&ST1);
+  }
+  while (!(ST1&0x01));
+
+  // Read magnetometer data  
+  uint8_t Mag[7];  
+  I2Cread(MAG_ADDRESS,0x03,7,Mag);
+  
+
+  // Create 16 bits values from 8 bits data
+  
+  // Magnetometer
+  int16_t mx=Mag[3]<<8 | Mag[2];
+  int16_t my=Mag[1]<<8 | Mag[0];
+  int16_t mz=Mag[5]<<8 | Mag[4];
+
+  //Mag in uT
+  mxt = mx * MAG_RES;
+  myt = my * MAG_RES;
+  mzt = mz * MAG_RES;
+
+  mxtf = Filter(mxt,mxtf,300);
+  mytf = Filter(myt,mytf,300);
+  mztf = Filter(mzt,mztf,300);
+
+  data.x = axgf * G;
+  data.y = aygf * G;
+  data.z = azgf * G;
+  data.temp = temperaturG;
+  data.magx = mxtf;
+  data.magy = mytf;
+  data.magz = mztf;
+
+  float xh,yh,ayf,axf,var_compass;
+
+  axf = atan( data.x / (sqrt(sq(data.y) + sq(data.z))));
+  ayf = atan( data.y / (sqrt(sq(data.x) + sq(data.z))));
+  
+  axf *= 180.00;   ayf *= 180.00;  
+  axf /= 3.141592; ayf /= 3.141592; 
+  
+  xh=mxtf*cos(ayf)+mytf*sin(ayf)*sin(axf)-mztf*cos(axf)*sin(ayf);
+  yh=mytf*cos(axf)+mztf*sin(axf);
+ 
+  var_compass=atan2((double)yh,(double)xh) * (180 / PI) -90; // angle in degrees
+  if (var_compass>0){var_compass=var_compass-360;}
+  var_compass=360+var_compass;  
 
   return data;
 }
