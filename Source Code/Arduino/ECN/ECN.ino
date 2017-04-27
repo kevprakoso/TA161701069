@@ -44,13 +44,27 @@ static const double init_lat = -6.889916, init_lon = 107.61133;
 //==========Connection & Database Variables===========//
 //====================================================//
 
+//const char* ssid = "L4BD4S4R-TU";    //  network SSID (name)
 const char* ssid = "TU Sostek";    //  network SSID (name)
+//const char* pass = "kumahaaing";   // network password
 const char* pass = "gatauudahdiganti";   // network password
-const char* mqtt_server = "black-boar.rmq.cloudamqp.com"; //MQTT server
+//const char* ssid = "LSKK Basement";    //  network SSID (name)
+//const char* pass = "noiznocon";   // network password
+//const char* ssid = "HME ITB";    //  network SSID (name)
+//const char* pass = "hmehattrick";   // network password
+//const char* ssid = "Muntilan-41";    //  network SSID (name)
+//const char* pass = "12345678";   // network password
+//const char* mqtt_server = "black-boar.rmq.cloudamqp.com"; //MQTT server
+//const char* mqtt_server = "127.0.0.1"; //MQTT server
+const char* mqtt_server = "167.205.7.226";
 const char* server_topic = "amq.topic.ecn"; //MQTT server topic
 String mqtt_clientID = "ECN-" + SensorID;
-String mqtt_user = "lsowqccg:lsowqccg";
-String mqtt_password = "kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j";
+//String mqtt_user = "lsowqccg:lsowqccg";
+//String mqtt_user = "guest";
+String mqtt_user = "/disaster:sensor_gempa";
+//String mqtt_password = "kbLv9YbzjQwxz20NH7Rfy98TTV2eK17j";
+//String mqtt_password = "guest";
+String mqtt_password = "12345";
 int status = WL_IDLE_STATUS;
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -287,7 +301,7 @@ String JsonToString(struct MessageData msg, struct SensorSetting set)
 
   a = a + "}";
 
-
+       //Serial.println(a);
   return a;
 }
 
@@ -512,3 +526,4 @@ void displayInfo()
     payload_data.coordinates[1] = String(init_lon);
   }
 }
+
