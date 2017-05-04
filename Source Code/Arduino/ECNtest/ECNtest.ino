@@ -34,7 +34,7 @@
 #define SendPeriod 1000 //in ms
 
 const char* TIMEZONE = "Asia/Jakarta";
-
+long t_gps,t_imu,t_send,now;
 
 
 //====================================================//
@@ -189,8 +189,9 @@ void loop()
 
   // This sketch displays information every time a new sentence is correctly encoded.
 
-
+  now = millis();
   data = Acc_Read();
+  t_imu = millis() - now;
   msg.accelerations[i].x = data.x;
   msg.accelerations[i].y = data.y;
   msg.accelerations[i].z = data.z;
@@ -205,6 +206,7 @@ void loop()
   if (i == 20)
   {
     i = 0;
+    now = millis();
     String YEAR = String(gps.date.year());
     String MONTH = String(gps.date.month());
     String DATE = String(gps.date.day());
@@ -212,16 +214,21 @@ void loop()
     String MINUTE = String(gps.time.minute());
     String SECOND = String(gps.time.second());
     msg.pointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":" + SECOND + "Z";
-
+    t_gps = millis() - now;
     //lstMsg = now;
     String message = JsonToString(msg);
     //msg.printTo(message);
     char message_t[800];
     message.toCharArray(message_t, 800);
     //publish sensor data to MQTT broker
+    now = millis();
     bool test = client.publish(server_topic, message_t);
+    t_send = millis() - now;
     if (test)
-      Serial.println("publish success");
+      Serial.print("publish success");
+      Serial.print("\t");Serial.print(String(t_imu));
+      Serial.print("\t");Serial.print(String(t_gps));
+      Serial.print("\t");Serial.print(String(t_send));
   }
   delay(50);
 }
