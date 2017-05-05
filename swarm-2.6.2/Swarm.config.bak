@@ -36,13 +36,13 @@ lastPath=default
 
 mapHeight=510
 
-mapLatitude=49.25238392750646
+mapLatitude=54.66454897012458
 
 mapLineColor=0
 
 mapLineWidth=2
 
-mapLongitude=-164.44146919690638
+mapLongitude=-146.11283584016496
 
 mapMaximized=true
 
@@ -63,6 +63,7 @@ nearestDividerLocation=553
 saveConfig=true
 
 server=AVO Winston;wws:pubavo1.wr.usgs.gov:16022:10000:1
+server=UW EWS;sls:rtserve.iris.washington.edu:18000
 
 showClip=true
 
