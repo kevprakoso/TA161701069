@@ -26,28 +26,34 @@
 #define SDA_PIN D1
 #define SCL_PIN D2
 #define PWR_MGMT 0x6B
-#define RXPin D3
-#define TXPin D4
-#define GPSBaud 9600
+#define RXPin D6
+#define TXPin D5
+#define GPSBaud 19200
 #define NData 40 // Amount of Data per one second
 
 const char* TIMEZONE = "Asia/Jakarta";
 const char* PROP = "ITB";
 const char* TYPE = "Point";
-const String SensorID = "1";
+const String SensorID = "4";
 const int SendPeriod = 1000; //in ms
-const int WaitGPS = 10;
+const int WaitGPS = 5;
 //Initial Coordinate
-static const double init_lat = -6.889916, init_lon = 107.61133;
+static const double init_lat = -6.9, init_lon = 107.7;
+//static const double init_lat = -6.892257, init_lon = 107.61102;
+//static const double init_lat = -6.892467, init_lon = 107.611024;
+
+
 
 //====================================================//
 //==========Connection & Database Variables===========//
 //====================================================//
 
 //const char* ssid = "L4BD4S4R-TU";    //  network SSID (name)
-const char* ssid = "TU Sostek";    //  network SSID (name)
+//const char* ssid = "TU Sostek";    //  network SSID (name)
+const char* ssid = "Andromax-M3Z-FD9A";    //  network SSID (name)
 //const char* pass = "kumahaaing";   // network password
-const char* pass = "gatauudahdiganti";   // network password
+//const char* pass = "gatauudahdiganti";   // network password
+const char* pass = "32194275";   // network password
 //const char* ssid = "LSKK Basement";    //  network SSID (name)
 //const char* pass = "noiznocon";   // network password
 //const char* ssid = "HME ITB";    //  network SSID (name)
@@ -57,7 +63,7 @@ const char* pass = "gatauudahdiganti";   // network password
 //const char* mqtt_server = "black-boar.rmq.cloudamqp.com"; //MQTT server
 //const char* mqtt_server = "127.0.0.1"; //MQTT server
 const char* mqtt_server = "167.205.7.226";
-const char* server_topic = "amq.topic.ecn"; //MQTT server topic
+const char* server_topic = "amq.topic.ecn.4"; //MQTT server topic
 String mqtt_clientID = "ECN-" + SensorID;
 //String mqtt_user = "lsowqccg:lsowqccg";
 //String mqtt_user = "guest";
@@ -169,35 +175,38 @@ void setup()
   Serial.begin(9600);
   Serial.println();
   ss.begin(GPSBaud);
-
+  long nosz = millis();
   while (!checkgps)
   {
-    while (ss.available() > 0)
-    {
-      if (gps.encode(ss.read()))
+      if (gps.location.isValid())
       {
         displayInfo();
         checkgps = true;
       }
-    }
-    if (millis() > WaitGPS*SendPeriod && gps.charsProcessed() < 10)
-    {
-      payload_data.coordinates[0] = String(init_lat);
-      payload_data.coordinates[1] = String(init_lon);
-      checkgps = true;
-    }
+      
+      if ((millis() > WaitGPS*SendPeriod) && (gps.charsProcessed() < 10))
+      {
+        payload_data.coordinates[0] = String(init_lat);
+        payload_data.coordinates[1] = String(init_lon);
+        checkgps = true;
+      }
   }
-  
+  Serial.println("OK");
+  delay(10000);
+  Serial.println("OK2");
 }
 
 
 void loop()
 {
+  Serial.println("loop");
   if(!client.loop()) client.connect(mqtt_clientID.c_str(), mqtt_user.c_str(), mqtt_password.c_str());
+  Serial.println("loop1");
   
   if (!client.connected()) {
     reconnect_server();
     i = 0;
+    Serial.println("loop2");
   }
   else
   {
@@ -224,12 +233,15 @@ void loop()
       String message = JsonToString(payload_data,payload_setting);
       char message_t[MQTT_MAX_PACKET_SIZE];
       message.toCharArray(message_t, MQTT_MAX_PACKET_SIZE);
-      
+      long nows = millis();
       bool test = client.publish(server_topic, message_t);
+      long t = millis() - nows;
       if(test)
-        Serial.println("publish success");
+        Serial.print("publish success ");
+        Serial.println(String(t));
     }
     delay((SendPeriod/NData)-t_imu);
+    Serial.println("loop3");
   }
   
 }
@@ -514,16 +526,7 @@ struct MPU9255 Acc_Read()
 
 void displayInfo()
 {
-  if (gps.location.isValid())
-  {
     payload_data.coordinates[0] = String (gps.location.lat(), 6);
     payload_data.coordinates[1] = String (gps.location.lng(), 6);
-  }
-  else
-  {
-    
-    payload_data.coordinates[0] = String(init_lat);
-    payload_data.coordinates[1] = String(init_lon);
-  }
 }
 
