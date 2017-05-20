@@ -28,21 +28,18 @@
 #define PWR_MGMT 0x6B
 #define RXPin D6
 #define TXPin D5
-#define GPSBaud 19200
+#define GPSBaud 9600
 #define NData 40 // Amount of Data per one second
 
-const char* TIMEZONE = "Asia/Jakarta";
-const char* PROP = "ITB";
-const char* TYPE = "Point";
-const String SensorID = "4";
+const char TIMEZONE[] PROGMEM = "Asia/Jakarta";
+const char PROP[] PROGMEM = "ITB";
+const char TYPE[] PROGMEM = "Point";
+const String SensorID = "1";
 const int SendPeriod = 1000; //in ms
-const int WaitGPS = 5;
+const int WaitGPS = 10;
+const int N = NData * (SendPeriod/1000); // Amount of Sample
 //Initial Coordinate
-static const double init_lat = -6.9, init_lon = 107.7;
-//static const double init_lat = -6.892257, init_lon = 107.61102;
-//static const double init_lat = -6.892467, init_lon = 107.611024;
-
-
+static const double init_lat = -6.889916, init_lon = 107.61133;
 
 //====================================================//
 //==========Connection & Database Variables===========//
@@ -50,12 +47,12 @@ static const double init_lat = -6.9, init_lon = 107.7;
 
 //const char* ssid = "L4BD4S4R-TU";    //  network SSID (name)
 //const char* ssid = "TU Sostek";    //  network SSID (name)
-const char* ssid = "Andromax-M3Z-FD9A";    //  network SSID (name)
+//const char* ssid = "Andromax-M3Z-FD9A";    //  network SSID (name)
 //const char* pass = "kumahaaing";   // network password
 //const char* pass = "gatauudahdiganti";   // network password
-const char* pass = "32194275";   // network password
-//const char* ssid = "LSKK Basement";    //  network SSID (name)
-//const char* pass = "noiznocon";   // network password
+//const char* pass = "32194275";   // network password
+const char* ssid = "LSKK Basement";    //  network SSID (name)
+const char* pass = "noiznocon";   // network password
 //const char* ssid = "HME ITB";    //  network SSID (name)
 //const char* pass = "hmehattrick";   // network password
 //const char* ssid = "Muntilan-41";    //  network SSID (name)
@@ -89,6 +86,7 @@ PubSubClient client(espClient);
 #define    ACC_FULL_SCALE_16_G       0x18
 
 #define    ACC_FILTER_OFF            0x08
+#define    ACC_FILTER_20HZ           0x0C
 
 const float ACC_RES = 6.10388817677e-05;
 const float MAG_RES = 0.149540696432;
@@ -122,7 +120,16 @@ struct MPU9255 {
   float magz;
 };
 
+struct times{
+  long now;
+  long gps;
+  long imu;
+  long mqtt;
+};
+
+
 MPU9255 data;
+times t;
 
 //TinyGPS++ Object
 TinyGPSPlus gps;
@@ -143,7 +150,7 @@ struct DataIMU {
 struct MessageData {
   String PointTime;
   String coordinates[2];
-  DataIMU acc[NData];
+  DataIMU acc[N];
 };
 
 struct SensorSetting {
@@ -172,76 +179,87 @@ void setup()
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println();
   ss.begin(GPSBaud);
-  long nosz = millis();
-  while (!checkgps)
-  {
-      if (gps.location.isValid())
-      {
-        displayInfo();
-        checkgps = true;
-      }
-      
-      if ((millis() > WaitGPS*SendPeriod) && (gps.charsProcessed() < 10))
-      {
-        payload_data.coordinates[0] = String(init_lat);
-        payload_data.coordinates[1] = String(init_lon);
-        checkgps = true;
-      }
-  }
-  Serial.println("OK");
-  delay(10000);
-  Serial.println("OK2");
+  Serial.println("1");
 }
 
 
 void loop()
 {
-  Serial.println("loop");
   if(!client.loop()) client.connect(mqtt_clientID.c_str(), mqtt_user.c_str(), mqtt_password.c_str());
-  Serial.println("loop1");
-  
   if (!client.connected()) {
     reconnect_server();
     i = 0;
-    Serial.println("loop2");
   }
   else
   {
-    long now = millis();
+    t.now = millis();
     data = Acc_Read();
-    long t_imu = millis() - now ;
-    yield();
-    payload_data.acc[i].x = String(data.x,4);
-    payload_data.acc[i].y = String(data.y,4);
-    payload_data.acc[i].z = String(data.z,4);
-    i++;
+    t.imu = millis() - t.now ;
     
-    if(i==NData)
+    payload_data.acc[i].x = char_repr(data.x);
+    payload_data.acc[i].y = char_repr(data.y);
+    payload_data.acc[i].z = char_repr(data.z);
+    if(i==0)
     {
+      Serial.println("2");
+      t.now = millis();
+      while (ss.available() > 0)
+      {
+        if (gps.encode(ss.read()))
+        {
+          displayInfo();
+          String YEAR = String(gps.date.year());
+          String MONTH = String(gps.date.month());
+          String DATE = String(gps.date.day());
+          String HOUR = String(gps.time.hour());
+          String MINUTE = String(gps.time.minute());
+          String SECOND = String(gps.time.second());
+          payload_data.PointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":" + SECOND + "Z";
+        }
+
+        if (millis()-t.now > WaitGPS*1000 && gps.charsProcessed() < 10)
+        {
+          Serial.println(F("No GPS detected: check wiring."));
+          while(true);
+        }
+      }
+      t.gps = millis() - t.now;
+    }
+    i++;
+    if(i==N)
+    {
+      Serial.println("3");
       i = 0;
-      String YEAR = String(gps.date.year());
-      String MONTH = String(gps.date.month());
-      String DATE = String(gps.date.day());
-      String HOUR = String(gps.time.hour());
-      String MINUTE = String(gps.time.minute());
-      String SECOND = String(gps.time.second());
-      payload_data.PointTime = YEAR + "-" + MONTH + "-" + DATE + "T" + HOUR + ":" + MINUTE + ":" + SECOND + "Z";
-      
       String message = JsonToString(payload_data,payload_setting);
+      int len = message.length();
       char message_t[MQTT_MAX_PACKET_SIZE];
       message.toCharArray(message_t, MQTT_MAX_PACKET_SIZE);
-      long nows = millis();
+      
+      t.now = millis();
       bool test = client.publish(server_topic, message_t);
-      long t = millis() - nows;
-      if(test)
+      t.mqtt = millis()-t.now;
+      
+      if(test){
         Serial.print("publish success ");
-        Serial.println(String(t));
+        Serial.print(String(t.imu));
+        Serial.print(" ");
+        Serial.print(String(t.mqtt));
+        Serial.print(" ");
+        Serial.print(String(t.gps));
+        Serial.print(" ");
+        Serial.print(payload_data.PointTime);
+        Serial.print(" ");
+        Serial.print(String(payload_data.coordinates[0]));
+        Serial.print(" ");
+        Serial.println(String(payload_data.coordinates[1]));
+      }
+        
     }
-    delay((SendPeriod/NData)-t_imu);
-    Serial.println("loop3");
+    if(t.imu < 25)
+      delay((1000/NData)-t.imu);
   }
   
 }
@@ -287,22 +305,22 @@ String JsonToString(struct MessageData msg, struct SensorSetting set)
 
   a = a + "\"accelerations\": [";
 
-  for (int i = 0; i < NData; i++)
+  for (int i = 0; i < N; i++)
   {
-    if (i != (NData-1))
+    if (i != (N-1))
     {
       a = a + "{";
-      a = a + "\"x\": " + msg.acc[i].x  + ",";
-      a = a + "\"y\": " + msg.acc[i].y  + ",";
-      a = a + "\"z\": " + msg.acc[i].z  ;
+      a = a + "\"x\": " + "\"" + msg.acc[i].x  + "\"" +  ",";
+      a = a + "\"y\": " + "\"" + msg.acc[i].y  + "\"" + ",";
+      a = a + "\"z\": " + "\"" + msg.acc[i].z  ;
       a = a + "},";
     }
     else
     {
       a = a + "{";
-      a = a + "\"x\": " + msg.acc[i].x  + ",";
-      a = a + "\"y\": " + msg.acc[i].y  + ",";
-      a = a + "\"z\": " + msg.acc[i].z  ;
+      a = a + "\"x\": " + "\"" + msg.acc[i].x  + "\"" + ",";
+      a = a + "\"y\": " + "\"" + msg.acc[i].y  + "\"" + ",";
+      a = a + "\"z\": " + "\"" + msg.acc[i].z  ;
       a = a + "}";
     }
 
@@ -346,9 +364,9 @@ void reconnect_server() {
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
-      Serial.print(" try again in" );
-      Serial.print(String(SendPeriod));
-      Serial.println("5 seconds");
+      Serial.print(" try again in " );
+      Serial.print(String(SendPeriod/1000));
+      Serial.println(" s");
       // Wait 1 Sending Period before retrying
       delay(SendPeriod);
     }
@@ -415,12 +433,11 @@ void MPU9255_Init()
   Wire.begin(SDA_PIN,SCL_PIN);
   
   // Set accelerometers low pass filter at 5Hz
-  I2CwriteByte(MPU9250_ADDRESS,29,0x06);
+  I2CwriteByte(MPU9250_ADDRESS,29,ACC_FILTER_20HZ);
 
   // Configure accelerometers range
   I2CwriteByte(MPU9250_ADDRESS,28,ACC_FULL_SCALE_2_G);
-  // accelerometers low pass filter off
-  I2CwriteByte(MPU9250_ADDRESS,29,ACC_FILTER_OFF);
+
   // Set by pass mode for the magnetometers
   I2CwriteByte(MPU9250_ADDRESS,0x37,0x02);
   
@@ -455,9 +472,9 @@ struct MPU9255 Acc_Read()
   ayg = ay * ACC_RES;
   azg = az * ACC_RES;
 
-  axgf = Filter(axg,axgf,30);
-  aygf = Filter(ayg,aygf,30);
-  azgf = Filter(azg,azgf,30);
+  axgf = axg;//Filter(axg,axgf,30);
+  aygf = ayg;//Filter(ayg,aygf,30);
+  azgf = azg;//Filter(azg,azgf,30);
 
   // Temp in Grad
   
@@ -494,9 +511,9 @@ struct MPU9255 Acc_Read()
   myt = my * MAG_RES;
   mzt = mz * MAG_RES;
 
-  mxtf = Filter(mxt,mxtf,300);
-  mytf = Filter(myt,mytf,300);
-  mztf = Filter(mzt,mztf,300);
+  mxtf = mxt;//Filter(mxt,mxtf,300);
+  mytf = myt;//Filter(myt,mytf,300);
+  mztf = mzt;//Filter(mzt,mztf,300);
 
   data.x = axgf * G;
   data.y = aygf * G;
@@ -521,12 +538,56 @@ struct MPU9255 Acc_Read()
   if (var_compass>0){var_compass=var_compass-360;}
   var_compass=360+var_compass;  
 
+  data.x = axgf*G*cos(var_compass) - aygf*G*sin(var_compass);
+  data.y = axgf*G*sin(var_compass) + aygf*G*cos(var_compass);
+ 
   return data;
 }
 
 void displayInfo()
 {
+  if (gps.location.isValid())
+  {
     payload_data.coordinates[0] = String (gps.location.lat(), 6);
     payload_data.coordinates[1] = String (gps.location.lng(), 6);
+  }
+  else
+  {
+    payload_data.coordinates[0] = String (init_lon, 6);
+    payload_data.coordinates[1] = String (init_lat, 6);
+  }
+}
+
+
+String char_repr(float x)
+{
+  uint8_t *temp;
+  char z[2];
+  int16_t y = (int16_t) (x*10000.00);
+  z[0] = (char) lowByte(y);
+  z[1] = (char) highByte(y);
+  String t = String(z[1]) + String(z[0]);
+
+  return t;
+}
+
+float rev_char_repr(String x)
+{
+  char y[2];
+  byte z[2];
+  int16_t yz;
+  float t;
+  int len,i,j,k;
+
+  len = x.length();
+  x.toCharArray(y,len+1);
+
+  z[1] = (int8_t) y[0];
+  z[0] = (int8_t) y[1];
+  
+  yz = (int16_t)((z[1]<<8)|(z[0]));
+  t = ((float)yz*0.0001);
+
+  return t;
 }
 
