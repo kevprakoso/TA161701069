@@ -9,7 +9,7 @@ using System.Threading;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using GMap.NET;
-
+using TweetSharp;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using GMap.NET.MapProviders;
@@ -45,6 +45,12 @@ namespace SimplePerfChart
         public FrmTestingForm()
         {
             InitializeComponent();
+            string key = "agOz9gCZATM58FI3ubCubyuot";
+            string secret = "57m1Xh5SGyuogn4zttjFpz6SHwRYBA9mpJdPNJHbXPoisf9KGn";
+            string token = "860367448268087296-yahVsCIdXOyDQzs7R9to8ITUurBaHHA";
+            string tokenSecret = " wrGpbaIF98cGPXYuXZxMm0BYDLoyb7w4hq3GA2q5JzGhT";
+          
+
             this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.Font = SystemInformation.MenuFont;
             textBox4.Text = "";
@@ -237,8 +243,13 @@ namespace SimplePerfChart
             double resultx;
             double resulty;
             double resultz;
-
-            
+            string key = "agOz9gCZATM58FI3ubCubyuot";
+            string secret = "57m1Xh5SGyuogn4zttjFpz6SHwRYBA9mpJdPNJHbXPoisf9KGn";
+            string token = "860367448268087296-yahVsCIdXOyDQzs7R9to8ITUurBaHHA";
+            string tokenSecret = " wrGpbaIF98cGPXYuXZxMm0BYDLoyb7w4hq3GA2q5JzGhT";
+            var service = new TweetSharp.TwitterService(key, secret);
+            service.AuthenticateWith(token, tokenSecret);
+            string message = "Peringatan telah terjadi gempa susulan dengan skala 6,3 dengan pusat gempa di lokasi Bandung";
             for (int i = 0; i < 40; i++)
             {
                 resultx = ((double.Parse(accelReport.accelerations[i].x)));
@@ -251,7 +262,15 @@ namespace SimplePerfChart
                 if (resultx > 9 || resulty > 9 || resultz > 9)
                 {
                     //MessageBox.Show("TERJADI GEMPA");
+
                     textBox4.BeginInvoke(new Action(() => { textBox4.Text = "GEMPA"; }));
+                    var result = service.SendTweet(new SendTweetOptions
+                    {
+                        Status = message
+                    }
+);
+                    //lblResult.Text = result.Text.ToString();
+
                 }
                 Thread.Sleep(25);                                            
 
@@ -693,6 +712,39 @@ namespace SimplePerfChart
             perfChart.Clear();
             perfChart1.Clear();
             perfChart2.Clear();
+            string a;
+           
+            string key = "agOz9gCZATM58FI3ubCubyuot";
+            string secret = "57m1Xh5SGyuogn4zttjFpz6SHwRYBA9mpJdPNJHbXPoisf9KGn";
+            string token = "860367448268087296-yahVsCIdXOyDQzs7R9to8ITUurBaHHA";
+            string tokenSecret = "wrGpbaIF98cGPXYuXZxMm0BYDLoyb7w4hq3GA2q5JzGhT";
+            var service = new TweetSharp.TwitterService(key, secret);
+            service.AuthenticateWith(token, tokenSecret);
+            Console.WriteLine("Tweet Sent");
+            string message = "Peringatan telah terjadi gempa susulan dengan skala 6,3 dengan pusat gempa di lokasi Bandung";
+
+            {
+
+                var result = service.SendTweet(new SendTweetOptions
+                {
+                    Status = message
+                   
+                    
+            }
+                
+);
+                
+                try
+                {
+                    a = result.Text.ToString();
+                    Console.WriteLine(a);
+                }
+                catch(System.NullReferenceException z)
+                {
+                    Console.WriteLine("Tweet Failed");
+                }
+            }
+            
         }
 
         
