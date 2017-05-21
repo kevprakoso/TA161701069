@@ -34,7 +34,7 @@
 const char* TIMEZONE = "Asia/Jakarta";
 const char* PROP = "ITB";
 const char* TYPE = "Point";
-const String SensorID = "1";
+const String SensorID = "2";
 const int SendPeriod = 1000; //in ms
 const int WaitGPS = 10;
 const int N = NData * (SendPeriod/1000); // Amount of Sample
@@ -45,10 +45,10 @@ static const double init_lat = -6.889916, init_lon = 107.61133;
 //==========Connection & Database Variables===========//
 //====================================================//
 
-//const char* ssid = "TU Sostek";    //  network SSID (name)
-const char* ssid = "Andromax-M3Z-FD9A";    //  network SSID (name)
-//const char* pass = "gatauudahdiganti";   // network password
-const char* pass = "32194275";   // network password
+const char* ssid = "TU Sostek";    //  network SSID (name)
+//const char* ssid = "Andromax-M3Z-FD9A";    //  network SSID (name)
+const char* pass = "gatauudahdiganti";   // network password
+//const char* pass = "32194275";   // network password
 //const char* ssid = "LSKK Basement";    //  network SSID (name)
 //const char* pass = "noiznocon";   // network password
 //const char* ssid = "marb";    //  network SSID (name)
@@ -56,7 +56,7 @@ const char* pass = "32194275";   // network password
 //const char* mqtt_server = "black-boar.rmq.cloudamqp.com"; //MQTT server
 //const char* mqtt_server = "127.0.0.1"; //MQTT server
 const char* mqtt_server = "167.205.7.226";
-const char* server_topic = "amq.topic.ecn.4"; //MQTT server topic
+const char* server_topic = "amq.topic.ecn.2"; //MQTT server topic
 String mqtt_clientID = "ECN-" + SensorID;
 //String mqtt_user = "lsowqccg:lsowqccg";
 //String mqtt_user = "guest";
@@ -183,6 +183,8 @@ void setup()
   Serial.printf("Connection status: %d\n", WiFi.status());
   WiFi.printDiag(Serial);
   Serial.println("1");
+  payload_data.coordinates[0] = String(init_lat);   
+  payload_data.coordinates[1] = String(init_lon);
 }
 
 
@@ -207,9 +209,9 @@ void loop()
     data = Acc_Read();
     t.imu = millis() - t.now ;
     
-    payload_data.acc[i].x = char_repr(data.x);
-    payload_data.acc[i].y = char_repr(data.y);
-    payload_data.acc[i].z = char_repr(data.z);
+    payload_data.acc[i].x = String(data.x, 6);
+    payload_data.acc[i].y = String(data.y, 6);
+    payload_data.acc[i].z = String(data.z, 6);
     if(i==0)
     {
       Serial.println("2");
@@ -220,7 +222,6 @@ void loop()
         {
           displayInfo();
         }
-      
           String YEAR = String(gps.date.year());
           String MONTH = String(gps.date.month());
           String DATE = String(gps.date.day());
@@ -259,11 +260,11 @@ void loop()
         Serial.print(" ");
         Serial.print(String(t.gps));
         Serial.print(" ");
-        Serial.print(payload_data.PointTime);
-        Serial.print(" ");
-        Serial.print(payload_data.coordinates[0]);
-        Serial.print(" ");
-        Serial.println(payload_data.coordinates[1]);
+//        Serial.print(payload_data.PointTime);
+//        Serial.print(" ");
+//        Serial.print(payload_data.coordinates[0]);
+//        Serial.print(" ");
+//        Serial.println(payload_data.coordinates[1]);
       }
     }
   }
@@ -317,19 +318,19 @@ String JsonToString(struct MessageData msg, struct SensorSetting set)
     if (i != (N-1))
     {
       a = a + "{";
-      a = a + "\"x\": " + "\"" + msg.acc[i].x  + "\"" +  ",";
-      a = a + "\"y\": " + "\"" + msg.acc[i].y  + "\"" + ",";
-      a = a + "\"z\": " + "\"" + msg.acc[i].z  ;
+      a = a + "\"x\": " + msg.acc[i].x  + ",";
+      a = a + "\"y\": " + msg.acc[i].y  + ",";
+      a = a + "\"z\": " + msg.acc[i].z  ;
       a = a + "},";
     }
     else
     {
       a = a + "{";
-      a = a + "\"x\": " + "\"" + msg.acc[i].x  + "\"" + ",";
-      a = a + "\"y\": " + "\"" + msg.acc[i].y  + "\"" + ",";
-      a = a + "\"z\": " + "\"" + msg.acc[i].z  ;
+      a = a + "\"x\": " + msg.acc[i].x  + ",";
+      a = a + "\"y\": " + msg.acc[i].y  + ",";
+      a = a + "\"z\": " + msg.acc[i].z  ;
       a = a + "}";
-    }
+    }   
 
   }
 
@@ -597,4 +598,5 @@ float rev_char_repr(String x)
 
   return t;
 }
+
 
